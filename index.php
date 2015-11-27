@@ -5,9 +5,13 @@ define('ROOT_DIR', realpath(dirname(__FILE__)) .'/');
 define('APP_DIR', ROOT_DIR .'app/');
 define('VERSION', '1.0');
 define('DIRECT', true);
+define('ENVIRONMENT', 'development'); // production | development
 
 // Config File
-require_once APP_DIR .'config/config.php';
+if(ENVIRONMENT != 'production')
+	require_once APP_DIR .'config/' . ENVIRONMENT . '/config.php';
+else
+	require_once APP_DIR . 'config/config.php';
 
 // Autoload Core Classes
 function autoload_core($class_name) {
