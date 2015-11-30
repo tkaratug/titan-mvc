@@ -7,15 +7,15 @@ class Model {
     */
     static $pdo = null;
 
-    /*
-	* Kullanacağımız veritabanı karakter seti
-	*/
-	static $charset = 'UTF8';
-
 	/*
 	* Son yapılan sorguyu saklar
 	*/
 	static $last_stmt = null;
+
+	/*
+	* Database config
+	*/
+	static $config = null;
 
 	/*
 	* PDO örneğini yoksa oluşturan, varsa
@@ -32,11 +32,15 @@ class Model {
 	*/
 	public static function init()
 	{
-		global $config;
+		if(ENVIRONMENT != 'production')
+			require_once APP_DIR . 'config/' . ENVIRONMENT . '/db.php';
+		else
+			require_once APP_DIR . 'config/db.php';
+		self::$config = $config;
 
-		self::$pdo = new PDO('mysql:host='.$config['db_host'].';dbname='.$config['db_name'].'',$config['db_username'],$config['db_password']);
+		self::$pdo = new PDO('mysql:host='.self::$config['db_host'].';dbname='.self::$config['db_name'].'',self::$config['db_username'],self::$config['db_password']);
 
-		self::$pdo->exec('SET NAMES `' . self::$charset . '`');
+		self::$pdo->exec('SET NAMES `' . self::$config['db_charset'] . '`');
 		self::$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 
 		return self::$pdo;

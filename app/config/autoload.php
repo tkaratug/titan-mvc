@@ -1,13 +1,13 @@
 <?php defined('DIRECT') OR exit('No direct script access allowed');
 /**
- * General config file
+ * Autoload config file
  * 
  * Turan Karatuğ - <tkaratug@hotmail.com.tr>
  * 30.11.2015
  */
 
-// Default Controller
-$config['default_controller'] 	= 'Home';
+// Autoload helpers
+$config['helpers']	= [];
 
-// Default Method
-$config['default_method'] 		= 'index';
+// Autoload plugins
+$config['plugins']	= [];

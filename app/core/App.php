@@ -2,6 +2,7 @@
 
 class App 
 {
+	protected $config;
 	protected $controller;
 	protected $method;
 	protected $params = [];
@@ -10,14 +11,40 @@ class App
 
 	public function __construct()
 	{
-		global $config;
-		$this->controller 	= $config['default_controller'];
-		$this->method 		= $config['default_method'];
+		// Getting config file
+		require_once APP_DIR . 'config/config.php';
+		$this->config 		= $config;
 
-		$url 			= $this->parseURL();
-		$this->routes 	= $this->loadFile(APP_DIR . 'config/routes');
+		// Setting default controller and method
+		$this->controller 	= $this->config['default_controller'];
+		$this->method 		= $this->config['default_method'];
+
+		// Getting current URL
+		$url 				= $this->parseURL();
+
+		// Getting routes
+		$this->routes 		= $this->loadFile(APP_DIR . 'config/routes');
 
 		// Getting Controller
+		$this->set_controller($url, $this->routes);
+
+		// Getting Method
+		$this->set_action($url);
+
+		// Getting parameters
+		$this->set_params($url);
+
+		call_user_func_array([$this->controller, $this->method], $this->params);
+
+	}
+
+	/**
+	 * Setting Controller
+	 * @param 	array $url
+	 * @return 	void
+	 */
+	private function set_controller($url)
+	{
 		if(isset($url[0])) {
 			if (file_exists(APP_DIR . 'controllers/' . $this->makeURL($url[0]) . '.php')) {
 				$this->controller = $this->makeURL($url[0]);
@@ -40,9 +67,15 @@ class App
 			$this->loadFile(APP_DIR . 'controllers/' . $this->controller);
 			$this->controller = new $this->controller;
 		}
-		
+	}
 
-		// Getting Method
+	/**
+	 * Setting Action
+	 * @param 	array $url
+	 * @return 	void
+	 */
+	private function set_action($url)
+	{
 		if (isset($url[1])) {
 			if ($url[1] != 'index') {
 				if (method_exists($this->controller, $url[1])) {
@@ -52,16 +85,24 @@ class App
 					$this->loadFile(APP_DIR . 'views/errors/error_404');
 					die();
 				}
-			}		
+			}
 		}
-
-		// Check Parameter Exists
-		$this->params = $url ? array_values($url) : [];
-
-		call_user_func_array([$this->controller, $this->method], $this->params);
-
 	}
 
+	/**
+	 * Setting Parameters
+	 * @param 	array $url
+	 * @return 	void
+	 */
+	private function set_params($url)
+	{
+		$this->params = $url ? array_values($url) : [];
+	}
+
+	/**
+	 * Parsing URL
+	 * @return array
+	 */
 	public function parseURL()
 	{
 		if (isset($_GET['url'])) {
@@ -69,6 +110,11 @@ class App
 		}
 	}
 
+	/**
+	 * Making URL
+	 * @param 	string $queryString
+	 * @return 	string
+	 */
 	public function makeURL($queryString)
     {
         $queryString = ucwords(strtolower(str_replace(['-','_','%20'], [' ',' ',' '], $queryString)));
@@ -76,6 +122,11 @@ class App
         return $queryString;
     }
 
+    /** 
+     * Loading file
+     * @param 	string $fileName
+     * @return 	void
+     */
     public function loadFile($fileName) {
         $fileName 	= $fileName . '.php';
         if (file_exists($fileName)) {

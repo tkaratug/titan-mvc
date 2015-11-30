@@ -8,7 +8,7 @@ class Controller
 	public function __construct()
 	{
 		// Getting config elements
-		global $config;
+		require_once APP_DIR . 'config/autoload.php';
 		$this->config = $config;
 
 		require_once 'Load.php';
