@@ -4,7 +4,7 @@
 define('BASE_DIR', 'http://siteadi.com/');
 define('ROOT_DIR', realpath(dirname(__FILE__)) .'/');
 define('APP_DIR', ROOT_DIR .'app/');
-define('VERSION', '1.0');
+define('VERSION', '1.0.1');
 define('DIRECT', true);
 define('ENVIRONMENT', 'production'); // production | development
 
