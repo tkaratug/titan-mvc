@@ -25,7 +25,7 @@ class Controller
 	public function autoload_helpers()
 	{
 		if(count($this->config['helpers']) > 0) {
-			foreach($thid->config['helpers'] as $helper) {
+			foreach($this->config['helpers'] as $helper) {
 				$helper_name = ucfirst($helper);
 				$this->load->helper($helper_name);
 			}
