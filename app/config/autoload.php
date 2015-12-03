@@ -7,7 +7,7 @@
  */
 
 // Autoload helpers
-$config['helpers']	= [];
+$config['helpers']	= ['url'];
 
 // Autoload plugins
-$config['plugins']	= [];
+$config['plugins']	= ['input','session','response'];

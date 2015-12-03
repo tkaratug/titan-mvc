@@ -20,7 +20,7 @@ class Controller
 
 	/**
 	 * Helper autoloader
-	 * @return void
+	 * @return bool
 	 */
 	public function autoload_helpers()
 	{
@@ -35,7 +35,7 @@ class Controller
 
 	/**
 	 * Plugin autoloader
-	 * @return void
+	 * @return bool
 	 */
 	public function autoload_plugins()
 	{

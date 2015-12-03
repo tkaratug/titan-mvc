@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Welcome to TITAN</title>
-	<link rel="shortcut icon" type="image/x-icon" href="<?php echo BASE_DIR; ?>public/images/favicon.ico" />
+	<link rel="shortcut icon" type="image/x-icon" href="<?php echo get_image('favicon.ico'); ?>" />
 	<style>
 	@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=latin,latin-ext);
 	body {
@@ -70,7 +70,7 @@
 </head>
 <body>
 	<div id="logo">
-		<img src="<?php echo BASE_DIR; ?>public/images/titan.png" width="90" />
+		<img src="<?php echo get_image('titan.png'); ?>" width="90" />
 	</div>
 	<div id="container">
 		<h3>Welcome to <span class="error_code">TITAN</span></h3>

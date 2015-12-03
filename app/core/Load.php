@@ -2,6 +2,11 @@
 
 class Load
 {
+	/**
+	 * Loading Model
+	 * @param 	string $model
+	 * @return 	object
+	 */
 	public function model($model)
 	{
 		if (file_exists('app/models/' . ucfirst($model) . '.php')) {
@@ -15,6 +20,12 @@ class Load
 		}
 	}
 
+	/**
+	 * Loading View
+	 * @param 	string 	$view
+	 * @param 	array 	$data
+	 * @return 	void
+	 */
 	public function view($view, $data = [])
 	{
 		if (file_exists('app/views/' . $view . '.php')) {
@@ -28,10 +39,15 @@ class Load
 		}
 	}
 
+	/**
+	 * Loading Plugin
+	 * @param 	string $plugin
+	 * @return 	object
+	 */
 	public function plugin($plugin)
 	{
-		if (file_exists('app/plugins/' . $plugin . '.php')) {
-			require_once 'app/plugins/' . $plugin . '.php';
+		if (file_exists('app/plugins/' . ucfirst($plugin) . '.php')) {
+			require_once 'app/plugins/' . ucfirst($plugin) . '.php';
 			return new $plugin();
 		} else {
 			$code	= 1003;
@@ -41,10 +57,15 @@ class Load
 		}
 	}
 
+	/**
+	 * Loading Helper
+	 * @param 	string $helper
+	 * @return 	void
+	 */
 	public function helper($helper)
 	{
-		if (file_exists('app/helpers/' . $helper . '.php')) {
-			require_once 'app/helpers/' . $helper . '.php';
+		if (file_exists('app/helpers/' . ucfirst($helper) . '.php')) {
+			require_once 'app/helpers/' . ucfirst($helper) . '.php';
 		} else {
 			$code	= 1004;
 			$text	= 'Helper bulunamadı';

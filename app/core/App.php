@@ -54,7 +54,8 @@ class App
 			} else {
 				// Check Route Exists
 				if (array_key_exists($this->makeURL($url[0]), $this->routes)) {
-					$this->controller = $this->routes[$this->makeURL($url[0])];
+					$route = explode('/', $this->routes[$this->makeURL($url[0])]);
+					$this->controller = $route[0];
 					$this->loadFile(APP_DIR . 'controllers/' . $this->controller);
 					$this->controller = new $this->controller;
 					unset($url[0]);
@@ -84,6 +85,19 @@ class App
 				} else {
 					$this->loadFile(APP_DIR . 'views/errors/error_404');
 					die();
+				}
+			}
+		} else {
+			// Check Routes for method
+			if (array_key_exists($this->makeURL($url[0]), $this->routes)) {
+				$route = explode('/', $this->routes[$this->makeURL($url[0])]);
+				if(isset($route[1])) {
+					if (method_exists($this->controller, $route[1])) {
+						$this->method = $route[1];
+					} else {
+						$this->loadFile(APP_DIR . 'views/errors/error_404');
+						die();
+					}
 				}
 			}
 		}

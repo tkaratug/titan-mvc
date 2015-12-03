@@ -1,0 +1,14 @@
+v1.0.2
+    - Düzeltme: 'Notice: A session had already been started - ignoring session_start()' hatası giderildi.
+    - Düzeltme: 'BASE_DIR' sabitine full url yerine sadece uygulamanın bulunduğu dizin verilecek şekilde düzeltildi.
+    - Yeni: Routing üzerinde geliştirme yapıldı. Artık 'ornek' => 'controller/method' şeklinde rota tanımlanabiliyor.
+    - Yeni: Url Helper eklendi. Helper sayfaya dahil edildiğinde içerisindeki fonksiyonlar kullanılabilir.
+    - Yeni: Response Plugin eklendi. 
+
+v1.0.1
+    - Yeni: '/config' dizini içerisinde 'autoload.php' ve 'db.php' adında iki yeni dosya oluşturuldu.
+    - Düzeltme: '/config/config.php' dosyasında yer alan helper ve plugin autoload dizileri '/config/autoload.php' dosyasına, database dizileri '/config/db.php' dosyasına taşındı.
+    - Düzeltme: '/app/core/App.php' dosyasında bulunan construct methodu güncellendi. Controller, method ve parametre seçim methodları eklendi.
+    - Düzeltme: '/app/core/Controller.php' dosyasında, otomatik yüklenecek helper ve pluginler için autoload config dosyası kullanıldı.
+    - Düzeltme: '/app/core/Model.php' dosyasında, database bağlantı ayarları için db config dosyası kullanıldı.
+    - Düzeltme: 'index.php' dosyasnıa 'BASE_DIR' sabiti eklendi. Config dosyasını include eden kod kaldırıldı.
