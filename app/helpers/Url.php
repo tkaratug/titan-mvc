@@ -3,7 +3,6 @@
  * URL Helper
  *
  * Turan Karatuğ - <tkaratug@hotmail.com.tr>
- * 01.12.2015
  */
 
 /**

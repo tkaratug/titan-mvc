@@ -3,7 +3,6 @@
  * General config file
  * 
  * Turan Karatuğ - <tkaratug@hotmail.com.tr>
- * 30.11.2015
  */
 
 // Default Controller
@@ -11,3 +10,9 @@ $config['default_controller'] 	= 'Home';
 
 // Default Method
 $config['default_method'] 		= 'index';
+
+// Session/Cookie Encryption Key
+$config['encryption_key'] 		= '';
+
+// Cookie Security
+$config['cookie_security'] 		= true;

@@ -1,6 +1,6 @@
 <?php defined('DIRECT') OR exit('No direct script access allowed');
 
-class Controller
+class Controller extends Loader
 {
 	protected $load;
 	protected $config;
@@ -8,19 +8,20 @@ class Controller
 	public function __construct()
 	{
 		// Getting config elements
-		require_once APP_DIR . 'config/autoload.php';
+		require APP_DIR . 'config/autoload.php';
 		$this->config = $config;
 
-		require_once 'Load.php';
-		$this->load = new Load();
+		// Instance of Loader
+		$this->load = $this;
 
+		// Autoload Helpers and Plugins
 		$this->autoload_helpers();
 		$this->autoload_plugins();
 	}
 
 	/**
 	 * Helper autoloader
-	 * @return bool
+	 * @return void
 	 */
 	public function autoload_helpers()
 	{
@@ -30,12 +31,11 @@ class Controller
 				$this->load->helper($helper_name);
 			}
 		}
-		return true;
 	}
 
 	/**
 	 * Plugin autoloader
-	 * @return bool
+	 * @return void
 	 */
 	public function autoload_plugins()
 	{
@@ -46,7 +46,6 @@ class Controller
 				$this->$plugin = new $plugin;
 			}
 		}
-		return true;
 	}
 
 }

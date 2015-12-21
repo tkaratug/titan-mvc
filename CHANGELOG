@@ -1,3 +1,13 @@
+v1.0.3
+    - Düzeltme: 'index.php' dosyasına, environment tanımına göre hata gösterimini açıp kapatan düzenleme eklendi.
+    - Düzeltme: 'Load.php' dosyasının ismi 'Loader.php' olarak değiştirildi.
+    - Yeni: Controller içinde model tanımlarken, custom model ismi belirleyebilme özelliği eklendi.
+    - Yeni: Session Hijacking güvenlik katmanı eklendi.
+    - Yeni: Session pluginine Flash Message methodu eklendi.
+    - Yeni: Cookie plugini eklendi.
+    - Yeni: Basit bir Log plugini eklendi.
+    - Yeni: Layout yönetimi için Template plugini eklendi.
+
 v1.0.2
     - Düzeltme: 'Notice: A session had already been started - ignoring session_start()' hatası giderildi.
     - Düzeltme: 'BASE_DIR' sabitine full url yerine sadece uygulamanın bulunduğu dizin verilecek şekilde düzeltildi.

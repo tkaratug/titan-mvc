@@ -1,9 +1,8 @@
 <?php defined('DIRECT') OR exit('No direct script access allowed');
 /**
- * Response Library
+ * Response Plugin
  * 
  * Turan Karatuğ - <tkaratug@hotmail.com.tr>
- * 02.12.2015
  */
 
 class Response

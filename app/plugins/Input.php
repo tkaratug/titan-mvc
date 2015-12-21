@@ -1,4 +1,9 @@
 <?php defined('DIRECT') OR exit('No direct script access allowed');
+/**
+ * Input Plugin
+ * 
+ * Turan Karatuğ - <tkaratug@hotmail.com.tr>
+ */
 
 class Input {
 

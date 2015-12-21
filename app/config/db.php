@@ -3,7 +3,6 @@
  * Database config file
  * 
  * Turan Karatuğ - <tkaratug@hotmail.com.tr>
- * 30.11.2015
  */
 
 // Database connection 
