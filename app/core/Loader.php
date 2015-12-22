@@ -49,14 +49,19 @@ class Loader
 	 */
 	public function plugin($plugin)
 	{
-		if (file_exists('app/plugins/' . ucfirst($plugin) . '.php')) {
-			require_once 'app/plugins/' . ucfirst($plugin) . '.php';
+	    if(file_exists('app/plugins/' . ucfirst($plugin) . '/' . ucfirst($plugin) . '.php')) {
+			require_once 'app/plugins/' . ucfirst($plugin) . '/' . ucfirst($plugin) . '.php';
 			$this->$plugin = new $plugin;
 		} else {
-			$code	= 1003;
-			$text	= 'Plugin bulunamadı';
-			require_once 'app/views/errors/error_system.php';
-			die();
+    		if (file_exists('app/plugins/' . ucfirst($plugin) . '.php')) {
+    			require_once 'app/plugins/' . ucfirst($plugin) . '.php';
+    			$this->$plugin = new $plugin;
+    		} else {
+    			$code	= 1003;
+    			$text	= 'Plugin bulunamadı';
+    			require_once 'app/views/errors/error_system.php';
+    			die();
+    		}
 		}
 	}
 
