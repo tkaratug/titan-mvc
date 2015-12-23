@@ -2,7 +2,7 @@
     "name": "tkaratug/titan-mvc",
     "type": "project",
     "description": "Titan Mini MVC Framework",
-    "keywords": ["titan","mini framework"],
+    "keywords": ["titan","mini","framework"],
     "homepage": "https://github.com/tkaratug/titan-mvc",
     "license": "MIT",
     "authors": [
