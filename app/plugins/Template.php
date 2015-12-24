@@ -5,7 +5,7 @@
  * Turan Karatuğ - <tkaratug@hotmail.com.tr>
  */
 
-class Template extends Loader
+class Template
 {
 	// Asset Selector
 	public $asset;
