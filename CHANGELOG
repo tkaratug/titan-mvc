@@ -11,6 +11,7 @@ v1.0.4
     - Yeni: Benchmark helperı eklendi.
 	- Yeni: User Agent helperı eklendi.
 	- Yeni: Url Helperına get_segments() ve current_segment() fonksiyonları eklendi.
+    - Yeni: Template Pluginine set_favicon() ve get_favicon() methodları eklendi.
 
 v1.0.3
     - Düzeltme: 'index.php' dosyasına, environment tanımına göre hata gösterimini açıp kapatan düzenleme eklendi.
