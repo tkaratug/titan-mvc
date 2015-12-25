@@ -6,7 +6,7 @@
  */
 
 // Autoload helpers
-$config['helpers']	= ['url'];
+$config['helpers']	= ['url','benchmark'];
 
 // Autoload plugins
 $config['plugins']	= ['input'];

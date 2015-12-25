@@ -16,7 +16,7 @@
 	</div>
 	<div id="footer">
 		<span class="copyright">Developed by <a href="http://www.turankaratug.com" target="_blank">Turan Karatuğ</a></span>
-		<span class="version">Version <?php echo VERSION; ?></span>
+		<span class="version">Version <?php echo VERSION; ?> | Memory Usage <?php echo memory_usage(); ?></span>
 	</div>
 </body>
 </html>

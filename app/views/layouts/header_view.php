@@ -14,6 +14,10 @@
 			}
 		}
 
+		// Favicon
+		if($this->template->get_favicon())
+			echo $this->template->get_favicon() . "\n";
+
 		// Custom CSS Files
 		if($this->template->get_css()) {
 			foreach($this->template->get_css() as $css_file) {

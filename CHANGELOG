@@ -1,3 +1,17 @@
+v1.0.4
+    - Düzeltme: '/system' Dizini oluşturuldu. '/app/core' dizini ve altındaki dosyalar buraya taşındı.
+    - Düzeltme: '/system/helpers' Dizini oluşturuldu. '/app/helpers' dizini altındaki default helper dosyaları buraya taşındı.
+    - Düzeltme: '/system/plugins' Dizini oluşturuldu. '/app/plugins' dizini altındaki default plugin dosyaları buraya taşındı.
+    - Düzeltme: Yeni oluşturulacak helper dosyaları '/app/helpers' dizini altında çalışacak şekilde düzenleme yapıldı.
+    - Düzeltme: Yeni oluşturulacak plugin dosyaları '/app/plugins' dizini altında çalışacak şekilde düzenleme yapıldı.
+	- Düzeltme: Template Plugininde tanımlanmamış js,css,title ve meta dizilerin döndürdüğü hata giderildi.
+	- Düzeltme: Url Helperındaki redirect() fonksiyonuna method parametresi eklendi.
+	- Düzeltme: Url Helperında base_url() fonksiyonuna parametre eklendi. base_url('path') şeklinde kullanılabilir.
+	- Yeni: Composer desteği eklendi.
+    - Yeni: Benchmark helperı eklendi.
+	- Yeni: User Agent helperı eklendi.
+	- Yeni: Url Helperına get_segments() ve current_segment() fonksiyonları eklendi.
+
 v1.0.3
     - Düzeltme: 'index.php' dosyasına, environment tanımına göre hata gösterimini açıp kapatan düzenleme eklendi.
     - Düzeltme: 'Load.php' dosyasının ismi 'Loader.php' olarak değiştirildi.
