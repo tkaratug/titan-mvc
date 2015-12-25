@@ -58,7 +58,6 @@ class App
 				$this->controller = $this->makeURL($url[0]);
 				$this->loadFile(APP_DIR . 'controllers/' . $this->controller);
 				$this->controller = new $this->controller;
-				unset($this->url[0]);
 			} else {
 				// Check Route Exists
 				if (array_key_exists($this->makeURL($url[0]), $this->routes)) {
@@ -66,7 +65,6 @@ class App
 					$this->controller = $route[0];
 					$this->loadFile(APP_DIR . 'controllers/' . $this->controller);
 					$this->controller = new $this->controller;
-					unset($this->url[0]);
 				} else {
 					$this->loadFile(APP_DIR . 'views/errors/error_404');
 					die();
@@ -109,6 +107,7 @@ class App
 				}
 			}
 		}
+		unset($this->url[0]);
 	}
 
 	/**
