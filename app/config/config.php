@@ -16,3 +16,6 @@ $config['encryption_key'] 		= '';
 
 // Cookie Security
 $config['cookie_security'] 		= true;
+
+// Autoload Composer
+$config['composer'] 			= false;

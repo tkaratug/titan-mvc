@@ -36,6 +36,13 @@ class App
 
 		call_user_func_array([$this->controller, $this->method], $this->params);
 
+		// Composer Autoload
+		if($this->config['composer'] == true) {
+			if(file_exists('vendor/autoload.php'))
+				require_once('vendor/autoload.php');
+			else
+				echo '<span style="color:#bc5858;"><strong>UYARI:</strong> Composer yükleyicisi bulunamadı.</span>';
+		}
 	}
 
 	/**
