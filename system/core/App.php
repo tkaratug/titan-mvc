@@ -7,6 +7,7 @@ class App
 	protected $method;
 	protected $params = [];
 	protected $routes;
+	protected $url;
 	
 
 	public function __construct()
@@ -20,19 +21,19 @@ class App
 		$this->method 		= $this->config['default_method'];
 
 		// Getting current URL
-		$url 				= $this->parseURL();
+		$this->url			= $this->parseURL();
 
 		// Getting routes
 		$this->routes 		= $this->loadFile(APP_DIR . 'config/routes');
 
 		// Getting Controller
-		$this->set_controller($url, $this->routes);
+		$this->set_controller($this->url);
 
 		// Getting Method
-		$this->set_action($url);
+		$this->set_action($this->url);
 
 		// Getting parameters
-		$this->set_params($url);
+		$this->set_params($this->url);
 
 		call_user_func_array([$this->controller, $this->method], $this->params);
 
@@ -57,7 +58,7 @@ class App
 				$this->controller = $this->makeURL($url[0]);
 				$this->loadFile(APP_DIR . 'controllers/' . $this->controller);
 				$this->controller = new $this->controller;
-				unset($url[0]);
+				unset($this->url[0]);
 			} else {
 				// Check Route Exists
 				if (array_key_exists($this->makeURL($url[0]), $this->routes)) {
@@ -65,7 +66,7 @@ class App
 					$this->controller = $route[0];
 					$this->loadFile(APP_DIR . 'controllers/' . $this->controller);
 					$this->controller = new $this->controller;
-					unset($url[0]);
+					unset($this->url[0]);
 				} else {
 					$this->loadFile(APP_DIR . 'views/errors/error_404');
 					die();
@@ -88,12 +89,12 @@ class App
 			if ($url[1] != 'index') {
 				if (method_exists($this->controller, $url[1])) {
 					$this->method = $url[1];
-					unset($url[1]);
 				} else {
 					$this->loadFile(APP_DIR . 'views/errors/error_404');
 					die();
 				}
 			}
+			unset($this->url[1]);
 		} else {
 			// Check Routes for method
 			if (array_key_exists($this->makeURL($url[0]), $this->routes)) {
