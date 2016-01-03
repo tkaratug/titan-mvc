@@ -3,13 +3,13 @@
 class Controller extends Loader
 {
 	protected $load;
-	protected $config;
+	protected $autoload;
 
 	public function __construct()
 	{
 		// Getting config elements
 		require APP_DIR . 'config/autoload.php';
-		$this->config = $config;
+		$this->autoload = $autoload;
 
 		// Instance of Loader
 		$this->load = $this;
@@ -25,8 +25,8 @@ class Controller extends Loader
 	 */
 	public function autoload_helpers()
 	{
-		if(count($this->config['helpers']) > 0) {
-			foreach($this->config['helpers'] as $helper) {
+		if(count($this->autoload['helpers']) > 0) {
+			foreach($this->autoload['helpers'] as $helper) {
 				$helper_name = ucfirst($helper);
 				$this->load->helper($helper_name);
 			}
@@ -39,8 +39,8 @@ class Controller extends Loader
 	 */
 	public function autoload_plugins()
 	{
-		if(count($this->config['plugins']) > 0) {
-			foreach($this->config['plugins'] as $plugin) {
+		if(count($this->autoload['plugins']) > 0) {
+			foreach($this->autoload['plugins'] as $plugin) {
 				$plugin_name = ucfirst($plugin);
 				$this->load->plugin($plugin_name);
 				$this->$plugin = new $plugin;

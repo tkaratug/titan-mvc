@@ -8,7 +8,7 @@
 class Log
 {
 
-	protected static $log_levels = [
+	protected $log_levels = [
 		0 => 'EMERGENCY',
 		1 => 'ALERT',
 		2 => 'CRITICAL',
@@ -25,10 +25,10 @@ class Log
 	 * @param 	string 	$message
 	 * @return 	void 	
 	 */
-	public static function write($level, $message)
+	public function write($level, $message)
 	{
-		$log_text = date('Y-m-d H:i:s') . ' ---> ' . self::$log_levels[$level] . ': ' . $message;
-		self::save_log($log_text);
+		$log_text = date('Y-m-d H:i:s') . ' ---> ' . $this->log_levels[$level] . ': ' . $message;
+		$this->save_log($log_text);
 	}
 
 	/**
@@ -36,7 +36,7 @@ class Log
 	 * @param 	string $log_text
 	 * @return 	void
 	 */
-	private static function save_log($log_text)
+	private function save_log($log_text)
 	{
 		$file_name 	= 'log-' . date('Y-m-d') . '.txt';
 		$file 		= fopen('app/logs/' . $file_name, "a");

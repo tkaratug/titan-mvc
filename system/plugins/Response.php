@@ -8,7 +8,7 @@
 class Response
 {
 
-	public static $status_codes = [
+	public $status_codes = [
 		100 => 'Continue',
 		101 => 'Switching Protocols',
 		200 => 'OK',
@@ -58,12 +58,12 @@ class Response
 	 * @param 	string $value
 	 * @return 	bool
 	 */
-	public static function set_header($key, $value)
+	public function set_header($key, $value)
 	{
 		if(headers_sent())
 			return false;
 
-		header($key.':'.$value);
+		header($key . ': ' . $value);
 
 		return true;
 	}
@@ -73,15 +73,35 @@ class Response
 	 * @param 	string $key
 	 * @return 	string
 	 */
-	public static function get_header($key)
+	public function get_header($key)
 	{
-		$headers = getallheaders();
+		$default_headers 	= getallheaders();
+		$custom_headers 	= headers_list();
 
-		if(array_key_exists($key, $headers)) {
-			return $headers[$key];
+		if($this->array_search_like($key, $custom_headers) !== false) {
+			$index 	= $this->array_search_like($key, $custom_headers);
+			$header = explode(':', $custom_headers[$index]);
+			return trim($header[1]);
+		} elseif(array_key_exists($key, $default_headers)) {
+			return $default_headers[$key];
 		} else {
 			return 'Header bilgisi bulunamadı';
 		}
+	}
+
+	/**
+	 * Make array like search
+	 * @param  	string 	$element
+	 * @param 	array 	$array
+	 * @return 	int|bool
+	 */
+	private function array_search_like($element, $array)
+	{
+		foreach($array as $key => $value) {
+			if(strpos($value, $element) !== false)
+				return $key;
+		}
+		return false;
 	}
 
 	/**
@@ -89,7 +109,7 @@ class Response
 	 * @param 	int $code
 	 * @return 	bool
 	 */
-	public static function set_status($code)
+	public function set_status($code)
 	{
 		return http_response_code($code);
 	}
@@ -98,11 +118,16 @@ class Response
 	 * Getting Header Status
 	 * @return 	array
 	 */
-	public static function get_status()
+	public function get_status($code = null)
 	{
+		if(is_null($code))
+			$status_code = http_response_code();
+		else
+			$status_code = $code;
+
 		return [
-			'code'	=> http_response_code(),
-			'text'	=> self::$status_codes[http_response_code()]
+			'code'	=> $status_code,
+			'text'	=> $this->status_codes[$status_code]
 		];
 	}
 

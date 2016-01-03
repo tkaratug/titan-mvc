@@ -8,14 +8,14 @@
 class Cookie
 {
 	
-	protected static $config;
-	protected static $seperator = '##';
+	protected $config;
+	protected $seperator = '##';
 
 	function __construct()
 	{
 		// Getting config elements
 		require APP_DIR . 'config/config.php';
-		self::$config = $config;
+		$this->config = $config;
 	}
 
 	/**
@@ -25,16 +25,16 @@ class Cookie
 	 * @param 	int 	$time
 	 * @return 	bool
 	 */	
-	public static function set($name, $value, $time = null)
+	public function set($name, $value, $time = null)
 	{
 		if(is_null($time)) {
-			if(self::$config['cookie_security'] == true)
-				setcookie($name, $value . self::$seperator . md5($value . self::$config['encryption_key']));
+			if($this->config['cookie_security'] == true)
+				setcookie($name, $value . $this->seperator . md5($value . $this->config['encryption_key']));
 			else
 				setcookie($name, $value);
 		} else {
-			if(self::$config['cookie_security'] == true)
-				setcookie($name, $value . self::$seperator . md5($value . self::$config['encryption_key']), time() + (60*60*$time));
+			if($this->config['cookie_security'] == true)
+				setcookie($name, $value . $this->seperator . md5($value . $this->config['encryption_key']), time() + (60*60*$time));
 			else
 				setcookie($name, $value, time() + (60*60*$time));
 		}
@@ -45,12 +45,12 @@ class Cookie
 	 * @param 	string 	$name
 	 * @return 	string
 	 */
-	public static function get($name)
+	public function get($name)
 	{
-		if(self::has($name)) {
-			if(self::$config['cookie_security'] == true) {
-				$slices = explode(self::$seperator, $_COOKIE[$name]);
-				if(md5($slices[0] . self::$config['encryption_key']) == $slices[1])
+		if($this->has($name)) {
+			if($this->config['cookie_security'] == true) {
+				$slices = explode($this->seperator, $_COOKIE[$name]);
+				if(md5($slices[0] . $this->config['encryption_key']) == $slices[1])
 					return $slices[0];
 				else
 					die('Cookie içeriği değiştirilmiş');
@@ -65,12 +65,14 @@ class Cookie
 	 * @param 	string 	$name
 	 * @return 	bool
 	 */
-	public static function delete($name)
+	public function delete($name)
 	{
-		if(self::has($name))
-			self::set($name, '', time() - 3600);
-		else
+		if($this->has($name)) {
+			unset($_COOKIE[$name]);
+			setcookie($name, '', time() - 3600);
+		} else {
 			return false;
+		}
 	}
 
 	/**
@@ -78,7 +80,7 @@ class Cookie
 	 * @param 	string 	$name
 	 * @return 	bool
 	 */
-	public static function has($name)
+	public function has($name)
 	{
 		if(isset($_COOKIE[$name]))
 			return true;

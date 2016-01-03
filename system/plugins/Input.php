@@ -12,7 +12,7 @@ class Input {
 	 * @param 	string $data
 	 * @return 	string
 	 */
-	public static function xss_clean($data)
+	public function xss_clean($data)
 	{
 		// Fix &entity\n;
 		$data = str_replace(array('&amp;','&lt;','&gt;'), array('&amp;amp;','&amp;lt;','&amp;gt;'), $data);
@@ -53,7 +53,7 @@ class Input {
 	 * @param 	string $data
 	 * @return  string
 	 */
-	public static function clean($data)
+	public function clean($data)
 	{
 		return strip_tags(htmlentities(trim(stripslashes($data)), ENT_NOQUOTES, "UTF-8"));
 	}
@@ -64,13 +64,13 @@ class Input {
 	 * @param 	bool 	$xss_clean
 	 * @return 	string
 	 */
-	public static function get($data = null, $xss_clean = true)
+	public function get($data = null, $xss_clean = true)
 	{
 		if($data == null) {
 			return $_GET;
 		} else {
 			if($xss_clean == true) {
-				return self::xss_clean($_GET[$data]);
+				return $this->xss_clean($_GET[$data]);
 			} else {
 				return $_GET[$data];
 			}
@@ -83,12 +83,12 @@ class Input {
 	 * @param 	bool 	$xss_clean
 	 * @return 	string
 	 */
-	public static function post($data = null, $xss_clean = true) {
+	public function post($data = null, $xss_clean = true) {
 		if($data == null) {
 			return $_POST;
 		} else {
 			if($xss_clean == true) {
-				return self::xss_clean($_POST[$data]);
+				return $this->xss_clean($_POST[$data]);
 			} else {
 				return $_POST[$data];
 			}
@@ -101,7 +101,7 @@ class Input {
 	 * @param 	bool 	$xss_clean
 	 * @return 	string
 	 */
-	public static function put($data = null, $xss_clean = true)
+	public function put($data = null, $xss_clean = true)
 	{
 		parse_str(file_get_contents("php://input"),$post_vars);
 
@@ -109,7 +109,7 @@ class Input {
 			return $post_vars;
 		} else {
 			if($xss_clean == true) {
-				return self::xss_clean($post_vars[$data]);
+				return $this->xss_clean($post_vars[$data]);
 			} else {
 				return $post_vars[$data];
 			}
@@ -122,7 +122,7 @@ class Input {
 	 * @param 	bool 	$xss_clean
 	 * @return 	string
 	 */
-	public static function delete($data = null, $xss_clean = true)
+	public function delete($data = null, $xss_clean = true)
 	{
 		parse_str(file_get_contents("php://input"),$post_vars);
 
@@ -130,7 +130,7 @@ class Input {
 			return $post_vars;
 		} else {
 			if($xss_clean == true) {
-				return self::xss_clean($post_vars[$data]);
+				return $this->xss_clean($post_vars[$data]);
 			} else {
 				return $post_vars[$data];
 			}
@@ -141,7 +141,7 @@ class Input {
 	 * HTTP Request Method
 	 * @return 	string
 	 */
-	public static function request_method()
+	public function request_method()
 	{
 		return $_SERVER['REQUEST_METHOD'];
 	}

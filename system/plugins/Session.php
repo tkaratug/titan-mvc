@@ -8,30 +8,35 @@
 class Session
 {
 
-	protected static $config;
+	protected $config;
 
 	function __construct()
 	{
+		// Configurations for security
+		ini_set('session.cookie_httponly', 1);
+		ini_set('session.use_only_cookies', 1);
+		ini_set('session.cookie_secure', 1);
+
 		// Getting config elements
 		require APP_DIR . 'config/config.php';
-		self::$config = $config;
+		$this->config = $config;
 
 		// Initialize Session
-		self::init();
+		$this->init();
 	}
 
 	/**
 	 * Starting Session and Hijacking Security
 	 * @return void
 	 */
-	public static function init()
+	public function init()
 	{
 		if(!isset($_SESSION)) {
 			session_start();
-			self::set('session_hash', self::generate_hash());
+			$this->set('session_hash', $this->generate_hash());
 		} else {
-			if(self::get('session_hash') != self::generate_hash())
-				self::destroy();
+			if($this->get('session_hash') != $this->generate_hash())
+				$this->destroy();
 		}
 	}
 
@@ -41,7 +46,7 @@ class Session
 	 * @param 	string 	$value
 	 * @return 	string
 	 */
-	public static function set($key, $value)
+	public function set($key, $value)
 	{
 		$_SESSION[$key] = $value;
 	}
@@ -51,9 +56,12 @@ class Session
 	 * @param 	string 	$key
 	 * @return 	string
 	 */
-	public static function get($key)
+	public function get($key = null)
 	{
-		return $_SESSION[$key];
+		if(is_null($key))
+			return $_SESSION;
+		else
+			return $_SESSION[$key];
 	}
 
 	/**
@@ -61,7 +69,7 @@ class Session
 	 * @param 	string 	$key
 	 * @return 	bool
 	 */
-	public static function is_exists($key)
+	public function is_exists($key)
 	{
 		return isset($_SESSION[$key]);
 	}
@@ -71,7 +79,7 @@ class Session
 	 * @param 	string 	$key
 	 * @return 	void
 	 */
-	public static function delete($key)
+	public function delete($key)
 	{
 		unset($_SESSION[$key]);
 	}
@@ -80,7 +88,7 @@ class Session
 	 * Destroy a session
 	 * @return 	string
 	 */
-	public static function destroy()
+	public function destroy()
 	{
 		session_destroy();
 	}
@@ -89,9 +97,9 @@ class Session
 	 * Generating Hash for Hijacking Security
 	 * @return string
 	 */
-	private static function generate_hash()
+	private function generate_hash()
 	{
-		return md5(sha1(md5($_SERVER['REMOTE_ADDR'] . self::$config['encryption_key'] . $_SERVER['HTTP_USER_AGENT'])));
+		return md5(sha1(md5($_SERVER['REMOTE_ADDR'] . $this->config['encryption_key'] . $_SERVER['HTTP_USER_AGENT'])));
 	}
 
 	/**
@@ -100,9 +108,9 @@ class Session
 	 * @param 	string $url
 	 * @return 	bool
 	 */
-	public static function set_flash($message, $redirect_url = null)
+	public function set_flash($message, $redirect_url = null)
 	{
-		self::set('flash_message', $message);
+		$this->set('flash_message', $message);
 		if (!is_null($redirect_url)) {
 			header("Location: $redirect_url");
 			exit();
@@ -114,11 +122,11 @@ class Session
 	 * Getting Flash Message
 	 * @return string
 	 */
-	public static function get_flash()
+	public function get_flash()
 	{
-		$message = self::get('flash_message');
+		$message = $this->get('flash_message');
 
-		self::delete('flash_message');
+		$this->delete('flash_message');
 
 		return $message;
 	}
@@ -127,8 +135,8 @@ class Session
 	 * Is Flash Message Exists?
 	 * @return bool
 	 */
-	public static function flash_exists()
+	public function flash_exists()
 	{
-		return self::is_exists('flash_message');
+		return $this->is_exists('flash_message');
 	}
 }

@@ -1,3 +1,14 @@
+v1.0.5
+    - Düzeltme: Session plugininde 'get()' methodu parametre almazsa tüm sessionu verecek şekilde düzenleme yapıldı.
+    - Düzeltme: Session pluginine güvenlik konfigürasyonları eklendi.
+    - Düzeltme: Cookie pluginindeki 'delete()' methodundan kaynaklanan hata giderildi.
+    - Düzeltme: Varsayılan cookie süresi 1 hafta olarak ayarlandı.
+    - Düzeltme: Response pluginindeki 'get_status()' methodunda, verilen parametreye göre status durumunu döndüren düzenleme yapıldı.
+    - Düzeltme: Benchmark helperı kaldırıldı.
+    - Yeni: Cache plugini eklendi.
+    - Yeni: Benchmark plugini eklendi.
+    - Yeni: Debug helperı eklendi.
+
 v1.0.4
     - Düzeltme: '/system' Dizini oluşturuldu. '/app/core' dizini ve altındaki dosyalar buraya taşındı.
     - Düzeltme: '/system/helpers' Dizini oluşturuldu. '/app/helpers' dizini altındaki default helper dosyaları buraya taşındı.
