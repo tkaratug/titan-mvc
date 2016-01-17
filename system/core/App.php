@@ -33,9 +33,8 @@ class App
 		$this->set_action($this->url);
 
 		// Getting parameters
-		$this->set_params($this->url);
-
-		call_user_func_array([$this->controller, $this->method], $this->params);
+		if(!$this->params)
+			$this->set_params($this->url);
 
 		// Composer Autoload
 		if($this->config['composer'] == true) {
@@ -44,6 +43,8 @@ class App
 			else
 				echo '<span style="color:#bc5858;"><strong>UYARI:</strong> Composer yükleyicisi bulunamadı.</span>';
 		}
+
+		call_user_func_array([$this->controller, $this->method], $this->params);
 	}
 
 	/**
@@ -88,8 +89,13 @@ class App
 				if (method_exists($this->controller, $url[1])) {
 					$this->method = $url[1];
 				} else {
-					$this->loadFile(APP_DIR . 'views/errors/error_404');
-					die();
+					unset($url[0]);
+					if(method_exists($this->controller, $this->method)) {
+						$this->params = array_values($url);	
+					} else {
+						$this->loadFile(APP_DIR . 'views/errors/error_404');
+						die();
+					}
 				}
 			}
 			unset($this->url[1]);

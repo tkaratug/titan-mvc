@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Titan Errors</title>
-	<link rel="shortcut icon" type="image/x-icon" href="<?php echo BASE_DIR; ?>public/images/favicon.ico" />
+	<link rel="shortcut icon" type="image/x-icon" href="<?php echo BASE_DIR; ?>/public/images/favicon.ico" />
 	<style>
 	@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=latin,latin-ext);
 	body {

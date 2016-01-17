@@ -1,3 +1,13 @@
+v1.0.6
+    - Düzeltme: Template plugininde css,js ve image dosyaları kontrolünde yaşanan hata giderildi.
+    - Düzeltme: App.php 'deki set_action() methodu, geçerli action bulunamadığında, default methoda parametre verecek şekilde düzenlendi.
+    - Düzeltme: Url helperındaki base_url() methodunda bulunan BASE_DIR sabitinin boş olması durumunda hatalı adres döndürmesi önlendi.
+    - Düzeltme: Input plugininde bulunan clean() methodunun ismi html_clean() olarak değiştirildi.
+    - Düzeltme: Input plugininde form verilerini çeken get, post, put ve delete methodları, gelen veriyi default olarak xss_clean() methodu ile XSS Filtresinden geçirecek şekilde düzenlendi.
+    - Yeni: Session pluginindeki set() methoduna, array ile toplu session oluşturabilme özelliği eklendi.
+    - Yeni: Pagination plugini eklendi.
+    - Yeni: Mail plugini eklendi.
+
 v1.0.5
     - Düzeltme: Session plugininde 'get()' methodu parametre almazsa tüm sessionu verecek şekilde düzenleme yapıldı.
     - Düzeltme: Session pluginine güvenlik konfigürasyonları eklendi.

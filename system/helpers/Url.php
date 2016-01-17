@@ -67,10 +67,17 @@ if ( ! function_exists('current_url')) {
 if ( ! function_exists('base_url')) {
 	function base_url($path = null)
 	{
-		if(is_null($path))
-			return request_scheme() . http_host() . BASE_DIR;
-		else
-			return request_scheme() . http_host() . BASE_DIR . '/' . $path;
+		if(is_null($path)) {
+			if(BASE_DIR == '/')
+				return request_scheme() . http_host();
+			else
+				return request_scheme() . http_host() . BASE_DIR;
+		} else {
+			if(BASE_DIR == '/')
+				return request_scheme() . http_host() . '/' . $path;
+			else
+				return request_scheme() . http_host() . BASE_DIR . '/' . $path;
+		}
 	}
 }
 

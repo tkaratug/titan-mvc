@@ -15,7 +15,6 @@ class Session
 		// Configurations for security
 		ini_set('session.cookie_httponly', 1);
 		ini_set('session.use_only_cookies', 1);
-		ini_set('session.cookie_secure', 1);
 
 		// Getting config elements
 		require APP_DIR . 'config/config.php';
@@ -46,9 +45,15 @@ class Session
 	 * @param 	string 	$value
 	 * @return 	string
 	 */
-	public function set($key, $value)
+	public function set($key, $value = null)
 	{
-		$_SESSION[$key] = $value;
+		if(is_array($key)) {
+			foreach($key as $anahtar => $deger) {
+				$_SESSION[$anahtar] = $deger;
+			}
+		} else {
+			$_SESSION[$key] = $value;	
+		}
 	}
 
 	/**

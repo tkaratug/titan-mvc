@@ -8,7 +8,7 @@
 class Template
 {
 	// Asset Selector
-	public $asset;
+	public $asset = [];
 
 	/**
 	 * Set CSS files.
@@ -24,7 +24,7 @@ class Template
 			$url = 'public/css/' . $css_file;
 
 			// Check is file exists
-			if(!file_exists($url)) {
+			if(!file_exists(ROOT_DIR . $url)) {
 				$code	= 1005;
 				$text	= "CSS Style dosyası bulunamadı: {$url}";
 				require_once 'app/views/errors/error_system.php';
@@ -32,7 +32,7 @@ class Template
 			}
 		}
 
-		$this->asset['header']['css'][]	= '<link rel="stylesheet" type="text/css" href="' . $url . '">';
+		$this->asset['header']['css'][]	= '<link rel="stylesheet" type="text/css" href="' . base_url($url) . '">';
 	}
 
 	/**
@@ -50,7 +50,7 @@ class Template
 			$url = 'public/js/' . $js_file;
 
 			// Check is file exists
-			if(!file_exists($url)) {
+			if(!file_exists(ROOT_DIR . $url)) {
 				$code	= 1006;
 				$text	= "Javascript dosyası bulunamadı: {$url}";
 				require_once 'app/views/errors/error_system.php';
@@ -58,7 +58,7 @@ class Template
 			}
 		}
 
-		$this->asset[$location]['js'][]	= '<script type="text/javascript" src="' . $url . '"></script>';
+		$this->asset[$location]['js'][]	= '<script type="text/javascript" src="' . base_url($url) . '"></script>';
 	}
 
 	/**
@@ -99,7 +99,7 @@ class Template
 			default 	: $icon_type = 'image/x-icon'; break;
 		}
 
-		$this->asset['header']['favicon'] = '<link rel="shortcut icon" type="' . $icon_type . '" href="public/images/' . $image . '" />';
+		$this->asset['header']['favicon'] = '<link rel="shortcut icon" type="' . $icon_type . '" href="' . base_url('public/images/' . $image) . '" />';
 	}
 
 	/**
@@ -108,7 +108,7 @@ class Template
 	 */
 	public function get_css()
 	{
-		if(array_key_exists('css', $this->asset['header']))
+		if(array_key_exists('header', $this->asset) && array_key_exists('css', $this->asset['header']))
 			return $this->asset['header']['css'];
 		else
 			return null;
@@ -133,7 +133,7 @@ class Template
 	 */
 	public function get_meta()
 	{
-		if(array_key_exists('meta', $this->asset['header']))
+		if(array_key_exists('header', $this->asset) && array_key_exists('meta', $this->asset['header']))
 			return $this->asset['header']['meta'];
 		else
 			return null;
@@ -145,7 +145,7 @@ class Template
 	 */
 	public function get_title()
 	{
-		if(array_key_exists('title', $this->asset['header']))
+		if(array_key_exists('header', $this->asset) && array_key_exists('title', $this->asset['header']))
 			return $this->asset['header']['title'];
 		else
 			return null;
@@ -157,7 +157,7 @@ class Template
 	 */
 	public function get_favicon()
 	{
-		if(array_key_exists('favicon', $this->asset['header']))
+		if(array_key_exists('header', $this->asset) && array_key_exists('favicon', $this->asset['header']))
 			return $this->asset['header']['favicon'];
 		else
 			return null;

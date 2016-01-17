@@ -53,7 +53,7 @@ class Input {
 	 * @param 	string $data
 	 * @return  string
 	 */
-	public function clean($data)
+	public function html_clean($data)
 	{
 		return strip_tags(htmlentities(trim(stripslashes($data)), ENT_NOQUOTES, "UTF-8"));
 	}
