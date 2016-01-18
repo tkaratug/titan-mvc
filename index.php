@@ -29,12 +29,11 @@ if(ENVIRONMENT == 'production') {
 	ini_set('display_errors', 1);
 }
 
-// Autoload Core Classes
-function autoload_core($class_name) {
-    require_once SYSTEM_DIR . 'core/' . $class_name . '.php';
-}
-
-spl_autoload_register('autoload_core');
+// Loading core classes
+require_once SYSTEM_DIR . 'core/App.php';
+require_once SYSTEM_DIR . 'core/Loader.php';
+require_once SYSTEM_DIR . 'core/Controller.php';
+require_once SYSTEM_DIR . 'core/Model.php';
 
 // Starting Titan
 $app = new App();
