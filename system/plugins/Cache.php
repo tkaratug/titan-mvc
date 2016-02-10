@@ -109,7 +109,7 @@ class Cache
 	 * @param 	string 	$key
 	 * @return 	string
 	 */
-	public function get($key)
+	public function read($key)
 	{
 		$cache_content = $this->load_cache();
 		if(!isset($cache_content[$key]['data']))
