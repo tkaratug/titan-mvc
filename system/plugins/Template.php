@@ -20,6 +20,7 @@ class Template
 	{
 		if($source == 'remote') {
 			$url = $css_file;
+			$this->asset['header']['css'][]	= '<link rel="stylesheet" type="text/css" href="' . $url . '">';
 		} else {
 			$url = 'public/css/' . $css_file;
 
@@ -30,9 +31,9 @@ class Template
 				require_once 'app/views/errors/error_system.php';
 				die();
 			}
-		}
 
-		$this->asset['header']['css'][]	= '<link rel="stylesheet" type="text/css" href="' . base_url($url) . '">';
+			$this->asset['header']['css'][]	= '<link rel="stylesheet" type="text/css" href="' . base_url($url) . '">';
+		}		
 	}
 
 	/**
@@ -46,6 +47,7 @@ class Template
 	{		
 		if($source == 'remote') {
 			$url = $js_file;
+			$this->asset[$location]['js'][]	= '<script type="text/javascript" src="' . $url . '"></script>';
 		} else {
 			$url = 'public/js/' . $js_file;
 
@@ -56,9 +58,9 @@ class Template
 				require_once 'app/views/errors/error_system.php';
 				die();
 			}
-		}
 
-		$this->asset[$location]['js'][]	= '<script type="text/javascript" src="' . base_url($url) . '"></script>';
+			$this->asset[$location]['js'][]	= '<script type="text/javascript" src="' . base_url($url) . '"></script>';
+		}
 	}
 
 	/**

@@ -6,5 +6,7 @@
  */
 
 return [
-	'Anasayfa'	=> 'Home'
+	'anasayfa'				=> 'Home/index',
+	'username/([a-zA-Z]+)'	=> 'Home/username/$1',
+	'userid/(\d+)'			=> 'Home/userid/$1'
 ];

@@ -11,4 +11,14 @@ class Home extends Controller
 	{
 		$this->load->view('home_view');
 	}
+
+	public function username($name)
+	{
+		echo $name;
+	}
+
+	public function userid($id)
+	{
+		echo $id;
+	}
 }

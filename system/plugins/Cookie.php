@@ -7,9 +7,23 @@
 
 class Cookie
 {
-	
-	protected $config;
-	protected $seperator = '##';
+	// Cookie config
+	private $config;
+
+	// Security seperator
+	private $seperator 		= '--';
+
+	// Cookie Path
+    protected   $path       = '/';
+
+    // Cookie Domain
+    protected   $domain     = '';
+
+    // Cookie Secure
+    protected   $secure     = false;
+
+    // HTTP Only
+    protected   $http_only  = true;
 
 	function __construct()
 	{
@@ -17,6 +31,70 @@ class Cookie
 		require APP_DIR . 'config/config.php';
 		$this->config = $config;
 	}
+
+	/**
+     * Set Cookie Path
+     * @param   string  $path
+     * @return  bool
+     */
+    public function set_path($path)
+    {
+        if ( ! is_string($path) ) {
+            return false;
+        }
+
+        $this->path = $path;
+
+        return $this;
+    }
+
+    /**
+     * Set Cookie Domain
+     * @param   string  $domain
+     * @return  $this|bool
+     */
+    public function set_domain($domain)
+    {
+        if ( ! is_string($domain) ) {
+            return false;
+        }
+
+        $this->domain = $domain;
+
+        return $this;
+    }
+
+    /**
+     * Set Cookie Secure
+     * @param   bool    $secure
+     * @return  $this|bool
+     */
+    public function set_secure($secure = false)
+    {
+        if ( ! is_bool($secure) ) {
+            return false;
+        }
+
+        $this->secure = $secure;
+
+        return $this;
+    }
+
+    /**
+     * Set Cookie HTTP Only
+     * @param   bool    $http
+     * @return  $this|bool
+     */
+    public function set_http_only($http = true)
+    {
+        if ( ! is_bool($http) ) {
+            return false;
+        }
+
+        $this->http_only = $http;
+
+        return $this;
+    }
 
 	/**
 	 * Setting Cookie
@@ -29,14 +107,14 @@ class Cookie
 	{
 		if(is_null($time)) {
 			if($this->config['cookie_security'] == true)
-				setcookie($name, $value . $this->seperator . md5($value . $this->config['encryption_key']));
+				setcookie($name, $value . $this->seperator . md5($value . $this->config['encryption_key']), 0, $this->path, $this->domain, $this->secure, $this->http_only);
 			else
-				setcookie($name, $value);
+				setcookie($name, $value, 0, $this->path, $this->domain, $this->secure, $this->http_only);
 		} else {
 			if($this->config['cookie_security'] == true)
-				setcookie($name, $value . $this->seperator . md5($value . $this->config['encryption_key']), time() + (60*60*$time));
+				setcookie($name, $value . $this->seperator . md5($value . $this->config['encryption_key']), time() + (60*60*$time), $this->path, $this->domain, $this->secure, $this->http_only);
 			else
-				setcookie($name, $value, time() + (60*60*$time));
+				setcookie($name, $value, time() + (60*60*$time), $this->path, $this->domain, $this->secure, $this->http_only);
 		}
 	}
 
@@ -69,7 +147,7 @@ class Cookie
 	{
 		if($this->has($name)) {
 			unset($_COOKIE[$name]);
-			setcookie($name, '', time() - 3600);
+			setcookie($name, '', time() - 3600, $this->path, $this->domain);
 		} else {
 			return false;
 		}
