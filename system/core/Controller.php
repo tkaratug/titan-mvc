@@ -47,5 +47,4 @@ class Controller extends Loader
 			}
 		}
 	}
-
 }

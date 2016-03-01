@@ -1,7 +1,7 @@
 <?php defined('DIRECT') OR exit('No direct script access allowed');
 
-class Model {
-
+class Model
+{
     /*
     * PDO sınıf örneğinin barınacağı değişken
     */
@@ -213,7 +213,7 @@ class Model {
 	}
 
 	/*
-	* Statik olarak çağırılan ve yukarıda olmayan 
+	* Statik olarak çağırılan ve yukarıda olmayan
 	* tüm metodları PDO'da çağıran sihirli metot
 	*/
 	public static function __callStatic($name, $arguments)
@@ -223,5 +223,4 @@ class Model {
 			$arguments
 		);
 	}
-    
 }

@@ -1,6 +1,6 @@
 <?php defined('DIRECT') OR exit('No direct script access allowed');
 
-class App 
+class App
 {
 	protected $config;
 	protected $controller;
@@ -8,7 +8,7 @@ class App
 	protected $params = [];
 	protected $routes;
 	protected $url;
-	
+
 
 	public function __construct()
 	{
@@ -26,7 +26,8 @@ class App
 		// Getting routes
 		$this->routes 		= $this->loadFile(APP_DIR . 'config/routes');
 
-		if($this->run() === false) {
+		if ($this->run() === false) {
+
 			// Getting Controller
 			$this->set_controller($this->url);
 
@@ -38,6 +39,7 @@ class App
 		}
 
 		// Composer Autoload
+        // @todo bu kısımda == true demeye gerek yok. Eğer diyeceksek de === şeklinde 3 tane eşittir kullanılabilir.
 		if($this->config['composer'] == true) {
 			if(file_exists('vendor/autoload.php'))
 				require_once('vendor/autoload.php');
@@ -51,12 +53,14 @@ class App
 	private function run()
 	{
 		$matched = 0;
-        $url = ltrim(str_replace(BASE_DIR,'',$_SERVER['REQUEST_URI']), '/');
+        $url = ltrim(str_replace(BASE_DIR, '', $_SERVER['REQUEST_URI']), '/');
 
         foreach($this->routes as $key => $value) {
+
             $key = '/^' . str_replace('/', '\/', $key) . '$/';
 
-            if(preg_match($key, $url)) {
+            if (preg_match($key, $url)) {
+
                 $matched++;
                 preg_match_all($key, $url, $matches);
                 array_shift($matches);
@@ -85,10 +89,7 @@ class App
             }
         }
 
-        if($matched > 0)
-            return true;
-        else
-            return false;
+        return $matched > 0;
 	}
 
 	/**
@@ -167,7 +168,7 @@ class App
         return $queryString;
     }
 
-    /** 
+    /**
      * Loading file
      * @param 	string $fileName
      * @return 	void
