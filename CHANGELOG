@@ -1,3 +1,9 @@
+v1.0.7
+    - Düzeltme: Cookie pluginine set_path(), set_domain(), set_secure(), set_http_only() methodları eklendi.
+    - Düzeltme: Template plugininde remote js ve css dosyaları dahil etmedeki hata giderildi.
+    - Düzeltme: Routing yapısı değiştirildi.
+    - Yeni: Routing yapısına Regex ile düzenli ifadeler desteği eklendi.
+
 v1.0.6
     - Düzeltme: Template plugininde css,js ve image dosyaları kontrolünde yaşanan hata giderildi.
     - Düzeltme: App.php 'deki set_action() methodu, geçerli action bulunamadığında, default methoda parametre verecek şekilde düzenlendi.
