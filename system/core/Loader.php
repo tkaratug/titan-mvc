@@ -47,26 +47,38 @@ class Loader
 	 * @param 	string $plugin
 	 * @return 	object
 	 */
-	public function plugin($plugin)
+	public function plugin($plugin, $params = null)
 	{
 		if(file_exists(APP_DIR . 'plugins/' . ucfirst($plugin) . '/' . ucfirst($plugin) . '.php') || file_exists(APP_DIR . 'plugins/' . ucfirst($plugin) . '.php')) {
 			if(file_exists(APP_DIR . 'plugins/' . ucfirst($plugin) . '/' . ucfirst($plugin) . '.php')) {
 				require_once APP_DIR . 'plugins/' . ucfirst($plugin) . '/' . ucfirst($plugin) . '.php';
-				$this->$plugin = new $plugin;
+				if(is_null($params))
+					$this->$plugin = new $plugin;
+				else
+					$this->$plugin = new $plugin($params);
 			} else {
 				if (file_exists(APP_DIR . 'plugins/' . ucfirst($plugin) . '.php')) {
 					require_once APP_DIR . 'plugins/' . ucfirst($plugin) . '.php';
-					$this->$plugin = new $plugin;
+					if(is_null($params))
+						$this->$plugin = new $plugin;
+					else
+						$this->$plugin = new $plugin($params);
 				}
 			}
 		} elseif(file_exists(SYSTEM_DIR . 'plugins/' . ucfirst($plugin) . '/' . ucfirst($plugin) . '.php') || file_exists(SYSTEM_DIR . 'plugins/' . ucfirst($plugin) . '.php')) {
 			if(file_exists(SYSTEM_DIR . 'plugins/' . ucfirst($plugin) . '/' . ucfirst($plugin) . '.php')) {
 				require_once SYSTEM_DIR . 'plugins/' . ucfirst($plugin) . '/' . ucfirst($plugin) . '.php';
-				$this->$plugin = new $plugin;
+				if(is_null($params))
+					$this->$plugin = new $plugin;
+				else
+					$this->$plugin = new $plugin($params);
 			} else {
 				if (file_exists(SYSTEM_DIR . 'plugins/' . ucfirst($plugin) . '.php')) {
 					require_once SYSTEM_DIR . 'plugins/' . ucfirst($plugin) . '.php';
-					$this->$plugin = new $plugin;
+					if(is_null($params))
+						$this->$plugin = new $plugin;
+					else
+						$this->$plugin = new $plugin($params);
 				}
 			}
 		} else {
