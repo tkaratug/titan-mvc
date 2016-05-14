@@ -1,19 +1,23 @@
 {
-    "name": "tkaratug/titan-mvc",
-    "type": "project",
-    "description": "Titan Mini MVC Framework",
-    "keywords": ["titan","mini","framework"],
-    "homepage": "https://github.com/tkaratug/titan-mvc",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Turan KARATUĞ",
-            "email": "tkaratug@hotmail.com.tr",
-            "homepage": "http://turankaratug.com",
-            "role": "Developer"
-        }
-    ],
-    "require": {
-        "php": ">=5.4.0"
+  "name": "tkaratug/titan-mvc",
+  "type": "project",
+  "description": "Titan Mini MVC Framework",
+  "keywords": [
+    "titan",
+    "mini",
+    "framework"
+  ],
+  "homepage": "https://github.com/tkaratug/titan-mvc",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Turan KARATUĞ",
+      "email": "tkaratug@hotmail.com.tr",
+      "homepage": "http://turankaratug.com",
+      "role": "Developer"
     }
+  ],
+  "require": {
+    "php": ">=5.4.0"
+  }
 }

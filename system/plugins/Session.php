@@ -52,7 +52,7 @@ class Session
 				$_SESSION[$anahtar] = $deger;
 			}
 		} else {
-			$_SESSION[$key] = $value;	
+			$_SESSION[$key] = $value;
 		}
 	}
 
