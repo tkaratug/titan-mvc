@@ -6,8 +6,11 @@
  */
 
 // Database connection 
-$config['db_host'] 		= 'localhost'; // Database host (e.g. localhost)
-$config['db_name'] 		= ''; // Database name
-$config['db_username'] 	= ''; // Database username
-$config['db_password'] 	= ''; // Database password
-$config['db_charset'] 	= 'UTF8';
+$config['db_driver']    = 'mysql';
+$config['db_host']      = 'localhost';
+$config['db_user']      = '';
+$config['db_pass']      = '';
+$config['db_name']      = '';
+$config['db_charset']   = 'utf8';
+$config['db_collation'] = 'utf8_general_ci';
+$config['db_prefix']    = '';

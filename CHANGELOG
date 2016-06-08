@@ -1,3 +1,9 @@
+v1.0.8
+    - Düzeltme: Database plugini TitanDB ile değiştirildi.
+    - Yeni: Form helper eklendi.
+    - Yeni: Validation (Doğrulama) plugini eklendi.
+    - Yeni: Çoklu dil desteği eklendi.
+
 v1.0.7
     - Düzeltme: Cookie pluginine set_path(), set_domain(), set_secure(), set_http_only() methodları eklendi.
     - Düzeltme: Template plugininde remote js ve css dosyaları dahil etmedeki hata giderildi.
