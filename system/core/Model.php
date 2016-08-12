@@ -2,18 +2,19 @@
 
 class Model {
 
-    public $db;
+    public  $db;
+    private $config;
 
     function __construct()
     {
         if(ENVIRONMENT != 'production')
-            require_once APP_DIR . 'config/' . ENVIRONMENT . '/db.php';
+            $this->config = require_once APP_DIR . 'config/' . ENVIRONMENT . '/db.php';
         else
-            require_once APP_DIR . 'config/db.php';
+            $this->config = require_once APP_DIR . 'config/db.php';
 
         require_once SYSTEM_DIR . 'plugins/Database.php';
 
-        $this->db = Database::init($config);
+        $this->db = Database::init($this->config);
     }
     
 }

@@ -1,3 +1,7 @@
+v1.0.9
+    - Düzeltme: Database pluginindeki reset() methodu kaynaklı hata giderildi.
+    - Düzeltme: '/app/config' dizini içerisindeki ayar dosyaları array veri döndürecek şekilde güncellendi.
+
 v1.0.8
     - Düzeltme: Database plugini TitanDB ile değiştirildi.
     - Yeni: Form helper eklendi.

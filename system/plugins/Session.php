@@ -17,8 +17,7 @@ class Session
 		ini_set('session.use_only_cookies', 1);
 
 		// Getting config elements
-		require APP_DIR . 'config/config.php';
-		$this->config = $config;
+		$this->config = require_once APP_DIR . 'config/config.php';
 
 		// Initialize Session
 		$this->init();

@@ -16,8 +16,7 @@ class Cache
 	function __construct()
 	{
 		// Get config elements
-		require APP_DIR . 'config/cache.php';
-		$this->config = $config;
+		$this->config = require_once APP_DIR . 'config/cache.php';
 
 		// Set configurations
 		$this->path 				= APP_DIR . $this->config['path'];

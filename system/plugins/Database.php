@@ -726,10 +726,16 @@ class Database
 	 */
 	private function reset()
 	{
+		$this->select 		= '*';
 		$this->where 		= [];
 		$this->join 		= [];
 		$this->order_by 	= [];
 		$this->having 		= [];
+		$this->insert_id 	= null;
+		$this->error 		= null;
+		$this->from 		= null;
+		$this->group_by		= null;
+		$this->limit 		= null;
 		$this->insert_id 	= null;
 		$this->error 		= null;
 		return;

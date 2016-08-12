@@ -13,7 +13,7 @@
 if( ! function_exists('get_lang') ) {
     function get_lang()
     {
-        require APP_DIR . 'config/language.php';
+        $config = require_once APP_DIR . 'config/language.php';
 
         if( ! isset($_SESSION) ) {
             session_start();
@@ -35,7 +35,7 @@ if( ! function_exists('get_lang') ) {
 if( ! function_exists('set_lang') ) {
     function set_lang($lang = '')
     {
-        require APP_DIR . 'config/language.php';
+        $config = require_once APP_DIR . 'config/language.php';
 
         if( ! is_string($lang) ) {
             return false;
@@ -65,7 +65,7 @@ if ( ! function_exists('lang') ) {
     {
         global $lang;
 
-        require APP_DIR . 'config/language.php';
+        $config = require_once APP_DIR . 'config/language.php';
 
         if( ! is_string($file) || ! is_string($key) ) {
             return false;

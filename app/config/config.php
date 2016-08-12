@@ -5,17 +5,21 @@
  * Turan Karatuğ - <tkaratug@hotmail.com.tr>
  */
 
-// Default Controller
-$config['default_controller'] 	= 'Home';
+return [
 
-// Default Method
-$config['default_method'] 		= 'index';
+	// Default Controller
+	'default_controller' 		=> 'Home',
 
-// Session/Cookie Encryption Key
-$config['encryption_key'] 		= '';
+	// Default Method
+	'default_method' 			=> 'index',
 
-// Cookie Security
-$config['cookie_security'] 		= true;
+	// Session/Cookie Encryption Key
+	'encryption_key' 			=> '',
 
-// Autoload Composer
-$config['composer'] 			= false;
+	// Cookie Security
+	'cookie_security' 			=> true,
+
+	// Autoload Composer
+	'composer' 					=> false
+
+];

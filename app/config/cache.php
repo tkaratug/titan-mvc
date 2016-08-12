@@ -5,17 +5,15 @@
  * Turan Karatuğ - <tkaratug@hotmail.com.tr>
  */
 
-/**
- * Cache dosyalarının tutulacağı dizin
- */
-$config['path'] 				= 'cache';
+return [
 
-/**
- * Cache dosyalarının uzantısı
- */
-$config['extension'] 			= '.cache';
+	// Cache dosyalarının tutulacağı dizin
+	'path' => 'cache',
 
-/**
- * Cache dosyalarının tutulacağı varsayılan süre değeri
- */
-$config['default_expire_time'] 	= 604800;
+	// Cache dosyalarının uzantısı
+	'extension'	=> '.cache',
+
+	// Cache dosyalarının tutulacağı varsayılan süre değeri
+	'default_expire_time' => 604800
+	
+];

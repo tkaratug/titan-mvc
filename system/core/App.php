@@ -13,8 +13,7 @@ class App
 	public function __construct()
 	{
 		// Getting config file
-		require_once APP_DIR . 'config/config.php';
-		$this->config 		= $config;
+		$this->config 		= $this->loadFile(APP_DIR . 'config/config');
 
 		// Setting default controller and method
 		$this->controller 	= $this->config['default_controller'];

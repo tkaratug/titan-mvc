@@ -5,5 +5,9 @@
  * Turan Karatuğ - <tkaratug@hotmail.com.tr>
  */
 
-$config['languages']        = ['tr' => 'Turkish', 'en' => 'English'];
-$config['default_language'] = 'tr';
+return [
+
+	'languages'			=> ['tr' => 'Turkish', 'en' => 'English'],
+	'default_language'	=> 'tr'
+
+];

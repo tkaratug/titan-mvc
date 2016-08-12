@@ -28,8 +28,7 @@ class Cookie
 	function __construct()
 	{
 		// Getting config elements
-		require APP_DIR . 'config/config.php';
-		$this->config = $config;
+		$this->config = require_once APP_DIR . 'config/config.php';
 	}
 
 	/**
