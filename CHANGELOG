@@ -1,3 +1,8 @@
+v1.1.0
+    - Düzeltme: Url helperında bulunan request_scheme() methodundan kaynaklanan hata giderildi.
+    - Projede birden fazla uygulama çalıştırma desteği eklendi. 
+      ('/app/controllers' dizini içerisinde backend ve frontend olmak üzere 2 örnek dizin oluşturuldu. Yönetici paneli ve site ön yüzü bu şekilde birbirinden ayrı olarak kodlanabilir.)
+
 v1.0.9
     - Düzeltme: Database pluginindeki reset() methodu kaynaklı hata giderildi.
     - Düzeltme: '/app/config' dizini içerisindeki ayar dosyaları array veri döndürecek şekilde güncellendi.

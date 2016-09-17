@@ -5,7 +5,7 @@
  * Titan is a simple mvc application framework for php developers.
  *
  * @author 		Turan Karatuğ - <tkaratug@hotmail.com.tr> - <www.turankaratug.com>
- * @version 	1.0.9
+ * @version 	1.1.0
  * @copyright	2016
  * @license		https://opensource.org/licenses/MIT
  * @link 		https://github.com/tkaratug/titan-mvc
@@ -16,9 +16,9 @@ define('BASE_DIR', '/');
 define('ROOT_DIR', realpath(dirname(__FILE__)) .'/');
 define('SYSTEM_DIR', ROOT_DIR .'system/');
 define('APP_DIR', ROOT_DIR .'app/');
-define('VERSION', '1.0.9');
+define('VERSION', '1.1.0');
 define('DIRECT', true);
-define('ENVIRONMENT', 'production'); // production | development
+define('ENVIRONMENT', 'development'); // production | development
 
 // Error Reporting
 if(ENVIRONMENT == 'production') {

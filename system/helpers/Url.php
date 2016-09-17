@@ -12,7 +12,10 @@
 if ( ! function_exists('request_scheme')) {
 	function request_scheme()
 	{
-		return $_SERVER['REQUEST_SCHEME'] . '://';
+		if (isset($_SERVER['HTTPS']))
+			return 'https://';
+		else
+			return 'http://';
 	}
 }
 

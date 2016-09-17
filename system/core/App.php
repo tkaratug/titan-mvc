@@ -5,9 +5,11 @@ class App
 	protected $config;
 	protected $controller;
 	protected $method;
-	protected $params = [];
+	protected $params 			= [];
 	protected $routes;
 	protected $url;
+	protected $directory;
+	protected $controller_dir 	= false;
 	
 
 	public function __construct()
@@ -18,6 +20,13 @@ class App
 		// Setting default controller and method
 		$this->controller 	= $this->config['default_controller'];
 		$this->method 		= $this->config['default_method'];
+
+		// Setting controller directory
+		if ($this->config['default_directory']) {
+			$this->directory = 'controllers/' . $this->config['default_directory'] . '/';
+		} else {
+			$this->directory = 'controllers/';
+		}
 
 		// Getting current URL
 		$this->url			= $this->parseURL();
@@ -61,20 +70,31 @@ class App
                 array_shift($matches);
                 $target = explode('/', $value);
 
-                if(file_exists(APP_DIR . 'controllers/' . ucfirst($target[0]) . '.php')) {
-                    $this->controller = $this->makeURL(ucfirst($target[0]));
-                    $this->loadFile(APP_DIR . 'controllers/' . $this->controller);
-                    $this->controller = new $this->controller;
+                if (is_dir(APP_DIR . 'controllers/' . $target[0])) {
+                	if (file_exists(APP_DIR . 'controllers/' . $target[0] . '/' . ucfirst($target[1]) . '.php')) {
+                		$this->controller = $this->makeURL(ucfirst($target[1]));
+                		$this->loadFile(APP_DIR . 'controllers/' . $target[0] . '/' . $this->controller);
+                		$this->controller = new $this->controller;
+                	} else {
+                		$this->loadFile(APP_DIR . 'views/errors/error404');
+                		die();
+                	}
+
+                	$this->method = $target[2];
+                	array_diff_key($target, array_flip(array(0,1,2)));
                 } else {
-                    $this->loadFile(APP_DIR . 'views/errors/error_404');
-					die();
-                }
+                	if(file_exists(APP_DIR . 'controllers/' . ucfirst($target[0]) . '.php')) {
+	                    $this->controller = $this->makeURL(ucfirst($target[0]));
+	                    $this->loadFile(APP_DIR . 'controllers/' . $this->controller);
+	                    $this->controller = new $this->controller;
+	                } else {
+	                    $this->loadFile(APP_DIR . 'views/errors/error_404');
+						die();
+	                }
 
-                $this->method = $target[1];
-
-                unset($target[0]);
-                unset($target[1]);
-                sort($target);
+	                $this->method = $target[1];
+                	array_diff_key($target, array_flip(array(0,1)));
+                }                
 
                 foreach($matches as $indis => $match) {
                     $target[$indis] = $match[0];
@@ -98,17 +118,31 @@ class App
 	private function set_controller($url)
 	{
 		if(isset($url[0])) {
-			if (file_exists(APP_DIR . 'controllers/' . $this->makeURL($url[0]) . '.php')) {
-				$this->controller = $this->makeURL($url[0]);
-				$this->loadFile(APP_DIR . 'controllers/' . $this->controller);
-				$this->controller = new $this->controller;
+
+			if (is_dir(APP_DIR . 'controllers/' . $this->makeURL($url[0]))) {
+				$this->controller_dir = true;
+				if (file_exists(APP_DIR . 'controllers/' . $this->makeURL($url[0]) . '/' . $this->makeURL($url[1]) . '.php')) {
+					$this->controller = $this->makeURL($url[1]);
+					$this->loadFile(APP_DIR . 'controllers/' . $this->makeURL($url[0]) . '/' . $this->controller);
+					$this->controller = new $this->controller;
+				} else {
+					$this->loadFile(APP_DIR . 'views/errors/error_404');
+					die();
+				}
 			} else {
-				$this->loadFile(APP_DIR . 'views/errors/error_404');
-				die();
+				if (file_exists(APP_DIR . $this->directory . $this->makeURL($url[0]) . '.php')) {
+					$this->controller = $this->makeURL($url[0]);
+					$this->loadFile(APP_DIR . $this->directory . $this->controller);
+					$this->controller = new $this->controller;
+				} else {
+					$this->loadFile(APP_DIR . 'views/errors/error_404');
+					die();
+				}
 			}
-			unset($this->url[0]);
+
+			array_diff_key($url, [0,1]);
 		} else {
-			$this->loadFile(APP_DIR . 'controllers/' . $this->controller);
+			$this->loadFile(APP_DIR . $this->directory . $this->controller);
 			$this->controller = new $this->controller;
 		}
 	}
@@ -120,16 +154,30 @@ class App
 	 */
 	private function set_action($url)
 	{
-		if (isset($url[1])) {
-			if ($url[1] != 'index') {
-				if (method_exists($this->controller, $url[1])) {
-					$this->method = $url[1];
-				} else {
-					$this->loadFile(APP_DIR . 'views/errors/error_404');
-					die();
+		if ($this->controller_dir === true) {
+			if (isset($url[2])) {
+				if ($url[2] != 'index') {
+					if (method_exists($this->controller, $url[2])) {
+						$this->method = $url[2];
+					} else {
+						$this->loadFile(APP_DIR . 'views/errors/error_404');
+						die();
+					}
 				}
+				unset($this->url[2]);
 			}
-			unset($this->url[1]);
+		} else {
+			if (isset($url[1])) {
+				if ($url[1] != 'index') {
+					if (method_exists($this->controller, $url[1])) {
+						$this->method = $url[1];
+					} else {
+						$this->loadFile(APP_DIR . 'views/errors/error_404');
+						die();
+					}
+				}
+				unset($this->url[1]);
+			}
 		}
 	}
 

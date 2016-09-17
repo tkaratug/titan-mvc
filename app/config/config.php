@@ -7,6 +7,9 @@
 
 return [
 
+	// Default Controller Directory
+	'default_directory'			=> 'frontend',
+
 	// Default Controller
 	'default_controller' 		=> 'Home',
 
