@@ -9,4 +9,5 @@ return [
 	'anasayfa'				=> 'frontend/home/index',
 	'username/([a-zA-Z]+)'	=> 'frontend/home/username/$1',
 	'userid/(\d+)'			=> 'frontend/home/userid/$1',
+	'backend'				=> 'backend/dashboard/index',
 ];
