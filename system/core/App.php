@@ -59,7 +59,11 @@ class App
 	private function run()
 	{
 		$matched = 0;
-        $url = ltrim(str_replace(BASE_DIR,'',$_SERVER['REQUEST_URI']), '/');
+        
+        if(BASE_DIR == '/')
+        	$url = ltrim($_SERVER['REQUEST_URI'], '/');
+        else
+        	$url = ltrim(str_replace(BASE_DIR,'',$_SERVER['REQUEST_URI']), '/');
 
         foreach($this->routes as $key => $value) {
             $key = '/^' . str_replace('/', '\/', $key) . '$/';
