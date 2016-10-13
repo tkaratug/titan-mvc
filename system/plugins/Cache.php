@@ -12,11 +12,14 @@ class Cache
 	private $path;
 	private $extension;
 	private $default_expire_time;
+	private $titan;
 
 	function __construct()
 	{
+		$this->titan = Loader::getInstance();
+
 		// Get config elements
-		$this->config = require_once APP_DIR . 'config/cache.php';
+		$this->config = $this->titan->config('cache');
 
 		// Set configurations
 		$this->path 				= APP_DIR . $this->config['path'];

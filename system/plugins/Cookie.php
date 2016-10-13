@@ -25,10 +25,15 @@ class Cookie
     // HTTP Only
     protected   $http_only  = true;
 
+    // Loader instance
+    private $titan;
+
 	function __construct()
 	{
+		$this->titan = Loader::getInstance();
+
 		// Getting config elements
-		$this->config = require_once APP_DIR . 'config/config.php';
+		$this->config = $this->titan->config('config');
 	}
 
 	/**

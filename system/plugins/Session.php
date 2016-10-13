@@ -8,7 +8,11 @@
 class Session
 {
 
+	// Session Config
 	protected $config;
+
+	// Loader instance
+	private $titan;
 
 	function __construct()
 	{
@@ -16,8 +20,10 @@ class Session
 		ini_set('session.cookie_httponly', 1);
 		ini_set('session.use_only_cookies', 1);
 
+		$this->titan = Loader::getInstance();
+
 		// Getting config elements
-		$this->config = require_once APP_DIR . 'config/config.php';
+		$this->config = $this->titan->config('config');
 
 		// Initialize Session
 		$this->init();

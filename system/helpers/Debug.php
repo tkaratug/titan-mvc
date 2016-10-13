@@ -23,16 +23,4 @@ if( ! function_exists('debug')) {
 	}
 }
 
-/**
- * Query Debug
- * @param 	bool 	$stop
- * @return 	string
- */
-if( ! function_exists('query_debug')) {
-	function query_debug($stop = false)
-	{
-		debug(Model::last_query(), $stop);
-	}
-}
-
 ?>

@@ -2,6 +2,24 @@
 
 class Loader
 {
+
+	private static $instance;
+
+	public function __construct() {
+        self::$instance = $this;
+    }
+
+    /**
+     * Getting Instance
+     * @return object
+     */
+    public static function getInstance() {
+        if (self::$instance === null) {
+            self::$instance = new self();
+        }
+        return self::$instance;
+    }
+
 	/**
 	 * Loading Model
 	 * @param 	string $model
@@ -107,6 +125,49 @@ class Loader
 			die();
 		}
 	}
+
+	/**
+	 * Config Loader
+	 * @param 	string $configFile
+	 * @param 	string $env ('prod' or 'dev')
+	 * @return 	void
+	 */
+	public function config($config, $env = 'prod')
+	{
+		if($env == 'prod')
+			$full_path = APP_DIR . 'config/' . $config . '.php';
+		elseif($env == 'dev')
+			$full_path = APP_DIR . 'config/development/' . $config . '.php';
+
+		if(file_exists($full_path)) {
+			return require_once $full_path;
+		} else {
+			$code 	= 1008;
+        	$text 	= 'Config dosyası bulunamadı. {' . $config . '}';
+        	require_once APP_DIR . 'views/errors/error_system.php';
+            die();
+		}
+	}
+
+	/**
+	 * Hook Loader
+	 * @param 	string $hook
+	 * @return 	void
+	 */
+	public function hook($hook)
+	{
+		$hook_file = APP_DIR . 'hooks/' . ucfirst($hook) . '.php';
+
+		if(file_exists($hook_file)) {
+			require_once $hook_file;
+		} else {
+			$code 	= 1009;
+        	$text 	= 'Hook dosyası bulunamadı. {' . $hook . '}';
+        	require_once APP_DIR . 'views/errors/error_system.php';
+            die();
+		}
+	}
+
 }
 
 ?>

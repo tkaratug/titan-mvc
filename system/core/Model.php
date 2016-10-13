@@ -4,13 +4,16 @@ class Model {
 
     public  $db;
     private $config;
+    private $titan;
 
     function __construct()
     {
+        $this->titan = Loader::getInstance();
+
         if(ENVIRONMENT != 'production')
-            $this->config = require_once APP_DIR . 'config/' . ENVIRONMENT . '/db.php';
+            $this->config = $this->titan->config('db','dev');
         else
-            $this->config = require_once APP_DIR . 'config/db.php';
+            $this->config = $this->titan->config('db');
 
         require_once SYSTEM_DIR . 'plugins/Database.php';
 
