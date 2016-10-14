@@ -546,3 +546,30 @@ if ( ! function_exists('form_close') ) {
         return '</form>';
     }
 }
+
+/**
+ * CSRF Token Generate
+ * @return string
+ */
+if ( ! function_exists('csrf_generate') ) {
+    function csrf_generate()
+    {
+        return $_SESSION['titan_token'] = base64_encode(openssl_random_pseudo_bytes(32));
+    }
+}
+
+/**
+ * CSRF Token Check
+ * @param $token
+ * @return boolean
+ */
+if ( ! function_exists('csrf_check') ) {
+    function csrf_check($token)
+    {
+        if (isset($_SESSION['titan_token']) && $token === $_SESSION['titan_token']) {
+            unset($_SESSION['titan_token']);
+            return true;
+        }
+        return false;
+    }
+}
