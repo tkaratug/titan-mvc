@@ -156,7 +156,11 @@ class Loader
 	public function database()
 	{
 		require_once SYSTEM_DIR . 'plugins/Database.php';
-		return Database::init($this->config('db', 'dev'));
+
+		if(ENVIRONMENT != 'production')
+            return Database::init($this->config('db', 'dev'));
+        else
+            return Database::init($this->config('db'));
 	}
 
 	/**
