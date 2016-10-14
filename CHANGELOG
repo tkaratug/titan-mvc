@@ -1,6 +1,8 @@
 v1.1.1
     - Düzeltme: Rotalama sistemindeki BASE_DIR sabitinden kaynaklanan hata giderildi.
+    - Düzeltme: Debug helperda bulunan 'query_debug()' methodu güncellendi.
     - Yeni: Sayfaya dahil edilecek olan plugin ve helperlar içerisinde 'Loader' yükleyici nesnesine erişim imkanı sağlandı. Böylece oluşturulacak bu plugin ve helperlara Titan'ın kendi kütüphaneleri dahil edilebilir.
+    - Yeni: CURL plugini eklendi.
     - Yeni: Hook sistemi eklendi.
     - Yeni: CSRF Protection desteği eklendi.
     - Yeni: Loader yükleyici nesnesine 'database()' methodu eklendi. Böylece oluşturulan helper ve plugin dosyalarında Database plugini çalıştırılabilir.
