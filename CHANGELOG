@@ -5,7 +5,6 @@ v1.1.1
     - Yeni: CSRF Protection desteği eklendi.
     - Yeni: Loader nesnesine 'config()'' methodu eklendi. Böylece 'app/config' dizini altında oluşturualcak config dosyaları, Loader nesnesi ile sisteme dahil edilebilir.
 
-
 v1.1.0
     - Düzeltme: Url helperında bulunan request_scheme() methodundan kaynaklanan hata giderildi.
     - Projede birden fazla uygulama çalıştırma desteği eklendi. 
