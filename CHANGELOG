@@ -3,7 +3,8 @@ v1.1.1
     - Yeni: Sayfaya dahil edilecek olan plugin ve helperlar içerisinde 'Loader' yükleyici nesnesine erişim imkanı sağlandı. Böylece oluşturulacak bu plugin ve helperlara Titan'ın kendi kütüphaneleri dahil edilebilir.
     - Yeni: Hook sistemi eklendi.
     - Yeni: CSRF Protection desteği eklendi.
-    - Yeni: Loader nesnesine 'config()'' methodu eklendi. Böylece 'app/config' dizini altında oluşturualcak config dosyaları, Loader nesnesi ile sisteme dahil edilebilir.
+    - Yeni: Loader yükleyici nesnesine 'database()' methodu eklendi. Böylece oluşturulan helper ve plugin dosyalarında Database plugini çalıştırılabilir.
+    - Yeni: Loader yükleyici nesnesine 'config()' methodu eklendi. Böylece 'app/config' dizini altında oluşturualcak config dosyaları, Loader nesnesi ile sisteme dahil edilebilir.
 
 v1.1.0
     - Düzeltme: Url helperında bulunan request_scheme() methodundan kaynaklanan hata giderildi.

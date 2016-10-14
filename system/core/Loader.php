@@ -150,6 +150,16 @@ class Loader
 	}
 
 	/**
+	 * Database Plugin Loader
+	 * @return object
+	 */
+	public function database()
+	{
+		require_once SYSTEM_DIR . 'plugins/Database.php';
+		return Database::init($this->config('db', 'dev'));
+	}
+
+	/**
 	 * Hook Loader
 	 * @param 	string $hook
 	 * @return 	void

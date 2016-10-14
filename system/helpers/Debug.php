@@ -23,4 +23,18 @@ if( ! function_exists('debug')) {
 	}
 }
 
+/**
+ * SQL Query Debug
+ * @param 	bool $stop
+ * @return 	string
+ */
+if ( ! function_exists('query_debug')) {
+	function query_debug($stop = false)
+	{
+		$titan 	= Loader::getInstance();
+		$db 	= $titan->database();
+		debug($db->last_query(), $stop);
+	}
+}
+
 ?>
