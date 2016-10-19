@@ -8,13 +8,13 @@
 class Curl
 {
 
-	protected $user_agent 		= $_SERVER['HTTP_USER_AGENT'];
+	protected $user_agent 		= 'test';
 
 	protected $timeout 			= 0;
 
 	protected $return_transfer 	= true;
 
-	protected $follow_action 	= false;
+	protected $follow_location 	= false;
 
 	protected $referer 			= null;
 
@@ -30,7 +30,7 @@ class Curl
 
 	private $curl;
 
-	public function __construct()
+	public function __construct($config = [])
 	{
 		if (!extension_loaded('curl')) {
 			$code	= 1010;
@@ -38,6 +38,40 @@ class Curl
 			require_once APP_DIR . 'views/errors/error_system.php';
 			die();
 		}
+
+		$this->config($config);
+	}
+
+	/**
+	 * Configuration
+	 * @param $config
+	 * @return void
+	 */
+	private function config($config = [])
+	{
+		if (array_key_exists('user_agent', $config))
+			$this->user_agent 		= $config['user_agent'];
+
+		if (array_key_exists('timeout', $config))
+			$this->timeout 			= $config['timeout'];
+
+		if (array_key_exists('return_transfer', $config))
+			$this->return_transfer 	= $config['return_transfer'];
+
+		if (array_key_exists('follow_location', $config))
+			$this->follow_location 	= $config['follow_location'];
+
+		if (array_key_exists('referer', $config))
+			$this->referer 			= $config['referer'];
+
+		if (array_key_exists('proxy', $config))
+			$this->proxy 			= $config['proxy'];
+
+		if (array_key_exists('port', $config))
+			$this->port 			= $config['port'];
+
+		if (array_key_exists('ssl_verifypeer', $config))
+			$this->ssl_verifypeer 	= $config['ssl_verifypeer'];
 	}
 
 	/**
@@ -46,20 +80,20 @@ class Curl
 	 * @param $proxy
 	 * @return void
 	 */
-	public function init($url, $proxy)
+	public function init($url, $proxy = null)
 	{
 		$this->curl = curl_init();
 		curl_setopt($this->curl, CURLOPT_URL, $url);
 		curl_setopt($this->curl, CURLOPT_USERAGENT, $this->user_agent);
 		curl_setopt($this->curl, CURLOPT_TIMEOUT, $this->timeout);
 		curl_setopt($this->curl, CURLOPT_RETURNTRANSFER, $this->return_transfer);
-		curl_setopt($this->curl, CURLOPT_FOLLOWACTION, $this->follow_action);
+		curl_setopt($this->curl, CURLOPT_FOLLOWLOCATION, $this->follow_location);
 		curl_setopt($this->curl, CURLOPT_REFERER, $this->referer);
 
-		if ($this->proxy)
+		if (!is_null($this->proxy))
 			curl_setopt($this->curl, CURLOPT_PROXY, $this->proxy);
 
-		if($this->port)
+		if ($this->port)
 			curl_setopt($this->curl, CURLOPT_PROXYPORT, $this->port);
 
 		$this->errno = curl_errno($this->curl);
@@ -139,7 +173,7 @@ class Curl
 		return $result;
 	}
 
-	public __destruct()
+	public function __destruct()
 	{
 		curl_close($this->curl);
 	}
