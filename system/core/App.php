@@ -10,12 +10,15 @@ class App
 	protected $url;
 	protected $directory;
 	protected $controller_dir 	= false;
+	private   $titan;
 	
 
 	public function __construct()
 	{
+		$this->titan = Loader::getInstance();
+		
 		// Getting config file
-		$this->config 		= $this->loadFile(APP_DIR . 'config/config');
+		$this->config 		= $this->titan->config('config');
 
 		// Setting default controller and method
 		$this->controller 	= $this->config['default_controller'];
@@ -32,7 +35,7 @@ class App
 		$this->url			= $this->parseURL();
 
 		// Getting routes
-		$this->routes 		= $this->loadFile(APP_DIR . 'config/routes');
+		$this->routes 		= $this->titan->config('routes');
 
 		if($this->run() === false) {
 			// Getting Controller
@@ -228,7 +231,7 @@ class App
         if (file_exists($fileName)) {
             return require_once $fileName;
         } else {
-        	$code 	= 1005;
+        	$code 	= 1007;
         	$text 	= 'Böyle bir dosya bulunmamaktadır. {' . $fileName . '}';
         	require_once APP_DIR . 'views/errors/error_system.php';
             die();

@@ -546,3 +546,37 @@ if ( ! function_exists('form_close') ) {
         return '</form>';
     }
 }
+
+/**
+ * CSRF Token Generate
+ * @return string
+ */
+if ( ! function_exists('csrf_generate') ) {
+    function csrf_generate()
+    {
+        $titan = Loader::getInstance();
+        $titan->plugin('session');
+        $titan->session->set('titan_token', base64_encode(openssl_random_pseudo_bytes(32)));
+        return $titan->session->get('titan_token');
+        
+    }
+}
+
+/**
+ * CSRF Token Check
+ * @param $token
+ * @return boolean
+ */
+if ( ! function_exists('csrf_check') ) {
+    function csrf_check($token)
+    {
+        $titan = Loader::getInstance();
+        $titan->plugin('session');
+        
+        if ($titan->session->is_exists('titan_token') && $token === $titan->session->get('titan_token')) {
+            $titan->session->delete('titan_token');
+            return true;
+        }
+        return false;
+    }
+}
