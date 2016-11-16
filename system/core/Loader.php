@@ -4,6 +4,8 @@ class Loader
 {
 
 	private static $instance;
+	
+	protected $loaded_configs = [];
 
 	public function __construct() {
         self::$instance = $this;
@@ -140,7 +142,9 @@ class Loader
 			$full_path = APP_DIR . 'config/development/' . $config . '.php';
 
 		if(file_exists($full_path)) {
-			return require_once $full_path;
+			if(!array_key_exists($config, $this->loaded_configs)) {
+				$this->loaded_configs[$config] = require_once $full_path;
+			return $this->loaded_configs[$config];
 		} else {
 			$code 	= 1008;
         	$text 	= 'Config dosyası bulunamadı. {' . $config . '}';

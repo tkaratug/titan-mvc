@@ -13,7 +13,8 @@
 if( ! function_exists('get_lang') ) {
     function get_lang()
     {
-        $config = require_once APP_DIR . 'config/language.php';
+		$titan	= Loader::getInstance();
+        $config = $titan->config('language');
 
         if( ! isset($_SESSION) ) {
             session_start();
@@ -35,7 +36,8 @@ if( ! function_exists('get_lang') ) {
 if( ! function_exists('set_lang') ) {
     function set_lang($lang = '')
     {
-        $config = require_once APP_DIR . 'config/language.php';
+        $titan	= Loader::getInstance();
+        $config = $titan->config('language');
 
         if( ! is_string($lang) ) {
             return false;
@@ -65,7 +67,8 @@ if ( ! function_exists('lang') ) {
     {
         global $lang;
 
-        $config = require_once APP_DIR . 'config/language.php';
+        $titan	= Loader::getInstance();
+        $config = $titan->config('language');
 
         if( ! is_string($file) || ! is_string($key) ) {
             return false;
