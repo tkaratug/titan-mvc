@@ -142,7 +142,7 @@ class Loader
 			$full_path = APP_DIR . 'config/development/' . $config . '.php';
 
 		if(file_exists($full_path)) {
-			if(!array_key_exists($config, $this->loaded_configs)) {
+			if(!array_key_exists($config, $this->loaded_configs))
 				$this->loaded_configs[$config] = require_once $full_path;
 			return $this->loaded_configs[$config];
 		} else {
