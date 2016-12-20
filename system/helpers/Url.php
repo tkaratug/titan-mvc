@@ -99,7 +99,7 @@ if ( ! function_exists('get_segments')) {
 			if(array_key_exists($index, $segments))
 				return $segments[$index];
 			else
-				return '<span style="color:#bc5858"><strong>UYARI:</strong> Böyle bir segment bulunmamaktadır - get_segments(' . $index . ')</span>';
+				return 0;
 		}
 	}
 }
