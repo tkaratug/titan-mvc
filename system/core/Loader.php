@@ -85,6 +85,7 @@ class Loader
 						$this->$plugin = new $plugin($params);
 				}
 			}
+			return $this->$plugin;
 		} elseif(file_exists(SYSTEM_DIR . 'plugins/' . ucfirst($plugin) . '/' . ucfirst($plugin) . '.php') || file_exists(SYSTEM_DIR . 'plugins/' . ucfirst($plugin) . '.php')) {
 			if(file_exists(SYSTEM_DIR . 'plugins/' . ucfirst($plugin) . '/' . ucfirst($plugin) . '.php')) {
 				require_once SYSTEM_DIR . 'plugins/' . ucfirst($plugin) . '/' . ucfirst($plugin) . '.php';
@@ -101,6 +102,7 @@ class Loader
 						$this->$plugin = new $plugin($params);
 				}
 			}
+			return $this->$plugin;
 		} else {
 			$code = 1003;
 			$text = 'Plugin bulunamadı';

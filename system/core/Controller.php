@@ -42,8 +42,7 @@ class Controller extends Loader
 		if(count($this->autoload['plugins']) > 0) {
 			foreach($this->autoload['plugins'] as $plugin) {
 				$plugin_name = ucfirst($plugin);
-				$this->load->plugin($plugin_name);
-				$this->$plugin = new $plugin;
+				$this->$plugin = $this->load->plugin($plugin_name);
 			}
 		}
 	}
