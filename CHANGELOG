@@ -1,3 +1,14 @@
+v1.1.3
+    [Düzeltme]: Mevcut 'Template' plugininin ismi 'Asset' olarak değiştirildi.
+    [Yeni]: CSS, JS ve imaj dosyalarının yer aldığı '/public' dizinine erişmek için 'PUBLIC_DIR' sabiti tanımlandı.
+    [Yeni]: 'Edge Template Engine' eklendi. Mevcut Template plugini Edge ile çalışacak şekilde güncellendi.
+    [Yeni]: Model dosyalarını farklı dizinler içinde gruplayabilme desteği eklendi.
+
+v1.1.2
+    - [Düzeltme]: Config dosyalarının yüklenmesi sırasında oluşan bir hata giderildi.
+    - [Düzeltme]: Multi-Language kullanımında oluşan bir hata giderildi.
+    - [Düzeltme]: Form Validation kullanımında oluşan bir hata giderildi. 
+
 v1.1.1
     - Düzeltme: Rotalama sistemindeki BASE_DIR sabitinden kaynaklanan hata giderildi.
     - Düzeltme: Debug helperda bulunan 'query_debug()' methodu güncellendi.

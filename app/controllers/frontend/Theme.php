@@ -9,10 +9,10 @@ class Theme extends Controller
 
 	public function index()
 	{
-		$this->load->plugin('template');
-		$this->template->set_title('Welcome to TITAN');
-		$this->template->set_favicon('favicon.ico');
-		$this->template->set_css('style.css');
+		$this->load->plugin('asset');
+		$this->asset->set_title('Welcome to TITAN');
+		$this->asset->set_favicon('favicon.ico');
+		$this->asset->set_css('style.css');
 		$this->load->view('theme_view');
 	}
 }

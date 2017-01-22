@@ -120,11 +120,11 @@ if ( ! function_exists('current_segment')) {
  * @param 	string 	$filepath
  * @return 	string
  */
-if ( ! function_exists('get_image')) {
-	function get_image($filepath)
-	{
-		return base_url('public/images/' . $filepath);
-	}
+if ( ! function_exists('get_image') ) {
+    function get_image($file)
+    {
+        return PUBLIC_DIR . 'images/' . $file;
+    }
 }
 
 /**
@@ -132,11 +132,21 @@ if ( ! function_exists('get_image')) {
  * @param 	string 	$filepath
  * @return 	string
  */
-if ( ! function_exists('get_css')) {
-	function get_css($filepath)
-	{
-		return base_url('public/css/' . $filepath);
-	}
+if ( ! function_exists('get_css') ) {
+    function get_css($file)
+    {
+        $filePath = PUBLIC_DIR . 'css/' . $file . '.css';
+        $rootPath = ROOT_DIR . 'public/css/' . $file . '.css';
+
+        if(file_exists($rootPath)) {
+            return '<link rel="stylesheet" href="' . $filePath . '">';
+        } else {
+            $code   = 1005;
+            $text   = "CSS Style dosyası bulunamadı: {$filePath}";
+            require_once 'app/views/errors/error_system.php';
+            die();
+        }
+    }
 }
 
 /**
@@ -144,11 +154,21 @@ if ( ! function_exists('get_css')) {
  * @param 	string 	$filepath
  * @return 	string
  */
-if ( ! function_exists('get_js')) {
-	function get_js($filepath)
-	{
-		return base_url('public/js/' . $filepath);
-	}
+if ( ! function_exists('get_js') ) {
+    function get_js($file)
+    {
+        $filePath = PUBLIC_DIR . 'js/' . $file . '.js';
+        $rootPath = ROOT_DIR . 'public/js/' . $file . '.js';
+
+        if(file_exists($rootPath)) {
+            return '<script src="' . $filePath . '">';
+        } else {
+            $code   = 1006;
+            $text   = "Javascript dosyası bulunamadı: {$filePath}";
+            require_once 'app/views/errors/error_system.php';
+            die();
+        }
+    }
 }
 
 /**

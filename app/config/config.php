@@ -23,6 +23,6 @@ return [
 	'cookie_security' 			=> true,
 
 	// Autoload Composer
-	'composer' 					=> false
+	'composer' 					=> true
 
 ];

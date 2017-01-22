@@ -25,12 +25,19 @@ class Loader
 	/**
 	 * Loading Model
 	 * @param 	string $model
+	 * @param 	string $custom_name
+	 * @param 	string $path
 	 * @return 	object
 	 */
-	public function model($model, $custom_name = null)
+	public function model($model, $custom_name = null, $path = null)
 	{
-		if (file_exists(APP_DIR . 'models/' . ucfirst($model) . '.php')) {
-			require_once APP_DIR . 'models/' . ucfirst($model) . '.php';
+		if (is_null($path))
+			$model_path = 'models/';
+		else
+			$model_path = 'models/' . $path . '/';
+
+		if (file_exists(APP_DIR . $model_path . ucfirst($model) . '.php')) {
+			require_once APP_DIR . $model_path . ucfirst($model) . '.php';
 			if(is_null($custom_name))
 				$this->$model = new $model();
 			else

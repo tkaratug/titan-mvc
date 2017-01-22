@@ -116,3 +116,20 @@ if ( ! function_exists('lang') ) {
         }
     }
 }
+
+/**
+ * Include View File
+ * @param $file string
+ * @param $vars array
+ * @param $cache boolean
+ * @return void
+ */
+if( ! function_exists('view') ) {
+    function view($file, $vars, $cache = false)
+    {
+        $titan = Loader::getInstance();
+        $titan->plugin('template');
+
+        echo $titan->template->render($file, $vars, $cache);
+    }
+}
