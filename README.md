@@ -9,8 +9,9 @@ Visit http://kilavuz.titanphp.com/ for more information and documentation.
 * The mod_rewrite Apache module
 
 # Installation
-* Download Titan and extract
-* Upload all files to remote server
+```sh
+$ composer create-project tkaratug/titan-mvc titan
+```
 
 # Documentation
 Visit http://kilavuz.titanphp.com/ to see the documentation.
