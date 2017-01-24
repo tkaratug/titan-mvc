@@ -161,7 +161,7 @@ if ( ! function_exists('get_js') ) {
         $rootPath = ROOT_DIR . 'public/js/' . $file . '.js';
 
         if(file_exists($rootPath)) {
-            return '<script src="' . $filePath . '">';
+            return '<script src="' . $filePath . '"></script>';
         } else {
             $code   = 1006;
             $text   = "Javascript dosyası bulunamadı: {$filePath}";
