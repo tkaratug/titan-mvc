@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Welcome to TITAN</title>
-	<link rel="stylesheet" href="<?php echo get_css('style.css'); ?>">
+	<?php echo get_css('style'); ?>
 	<link rel="shortcut icon" type="image/x-icon" href="<?php echo get_image('favicon.ico'); ?>" />
 </head>
 <body>
