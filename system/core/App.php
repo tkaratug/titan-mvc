@@ -88,7 +88,6 @@ class App
                 	}
 
                 	$this->method = $target[2];
-                	array_diff_key($target, array_flip(array(0,1,2)));
                 } else {
                 	if(file_exists(APP_DIR . 'controllers/' . ucfirst($target[0]) . '.php')) {
 	                    $this->controller = $this->makeURL(ucfirst($target[0]));
@@ -100,7 +99,6 @@ class App
 	                }
 
 	                $this->method = $target[1];
-                	array_diff_key($target, array_flip(array(0,1)));
                 }                
 
                 foreach($matches as $indis => $match) {
@@ -136,6 +134,7 @@ class App
 					$this->loadFile(APP_DIR . 'views/errors/error_404');
 					die();
 				}
+                $this->url = array_diff_key($url, [0,1]);
 			} else {
 				if (file_exists(APP_DIR . $this->directory . $this->makeURL($url[0]) . '.php')) {
 					$this->controller = $this->makeURL($url[0]);
@@ -145,9 +144,9 @@ class App
 					$this->loadFile(APP_DIR . 'views/errors/error_404');
 					die();
 				}
+                $this->url = array_diff_key($url, [0]);
 			}
 
-			array_diff_key($url, [0,1]);
 		} else {
 			$this->loadFile(APP_DIR . $this->directory . $this->controller);
 			$this->controller = new $this->controller;
