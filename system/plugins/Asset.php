@@ -22,10 +22,11 @@ class Asset
 			$url = $css_file;
 			$this->asset['header']['css'][]	= '<link rel="stylesheet" type="text/css" href="' . $url . '">';
 		} else {
-			$url = 'public/css/' . $css_file;
+			$part 	= explode('.css', $css_file);
+			$url 	= 'public/css/' . $part[0] . '.css' . $part[1];
 
 			// Check is file exists
-			if(!file_exists(ROOT_DIR . $url)) {
+			if(!file_exists(ROOT_DIR . 'public/css/' . $part[0] . '.css')) {
 				$code	= 1005;
 				$text	= "CSS Style dosyası bulunamadı: {$url}";
 				require_once 'app/views/errors/error_system.php';
