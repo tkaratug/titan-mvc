@@ -16,6 +16,11 @@ $ composer create-project tkaratug/titan-mvc titan
 # Documentation
 Visit http://kilavuz.titanphp.com/ to see the documentation.
 
+# To Do
+- File Upload
+- Auth
+- Curl
+
 # Licence
 Titan is released under the MIT license.
 
