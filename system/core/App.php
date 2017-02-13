@@ -124,11 +124,11 @@ class App
 	{
 		if(isset($url[0])) {
 
-			if (is_dir(APP_DIR . 'controllers/' . $this->makeURL($url[0]))) {
+			if (is_dir(APP_DIR . 'controllers/' . $url[0])) {
 				$this->controller_dir = true;
-				if (file_exists(APP_DIR . 'controllers/' . $this->makeURL($url[0]) . '/' . $this->makeURL($url[1]) . '.php')) {
+				if (file_exists(APP_DIR . 'controllers/' . $url[0] . '/' . $this->makeURL($url[1]) . '.php')) {
 					$this->controller = $this->makeURL($url[1]);
-					$this->loadFile(APP_DIR . 'controllers/' . $this->makeURL($url[0]) . '/' . $this->controller);
+					$this->loadFile(APP_DIR . 'controllers/' . $url[0] . '/' . $this->controller);
 					$this->controller = new $this->controller;
 				} else {
 					$this->loadFile(APP_DIR . 'views/errors/error_404');
