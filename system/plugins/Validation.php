@@ -57,8 +57,13 @@ class Validation
                     $filter = $group[0];
                     $params = $group[1];
 
-                    if($this->$filter($data[$key], $params) === false)
-                        $this->errors[] = lang('validation', $filter . '_error', ['%s' => $key, '%t' => $params]);
+                    if($filter == 'matches') {
+                        if($this->matches($data[$key], $data[$params]) === false)
+                            $this->errors[] = lang('validation', $filter . '_error', ['%s' => $key, '%t' => $params]);                        
+                    } else {
+                        if($this->$filter($data[$key], $params) === false)
+                            $this->errors[] = lang('validation', $filter . '_error', ['%s' => $key, '%t' => $params]);
+                    }
                 } else {
                     if ($this->$part($data[$key]) === false)
                         $this->errors[] = lang('validation', $part . '_error', $key);
@@ -399,6 +404,20 @@ class Validation
         } else {
             return false;
         }
+    }
+
+    /**
+     * Matched Fields Validation
+     * @param   string $data
+     * @param   string $field
+     * @return  bool
+     */
+    protected function matches($data, $field)
+    {
+        if($data == $field)
+            return true;
+        else
+            return false;
     }
 
 }

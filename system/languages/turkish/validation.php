@@ -26,3 +26,4 @@ $lang['validation']['valid_cc_error']       = '%s alanı geçerli bir kredi kart
 $lang['validation']['contains_error']       = '%s alanı "%t" içermelidir';
 $lang['validation']['min_numeric_error']    = '%s alanı minimum "%t" değeri alabilir';
 $lang['validation']['max_numeric_error']    = '%s alanı maximum "%t" değeri alabilir';
+$lang['validation']['matches_error']		= '%s alanı %t alanı ile eşleşmiyor';

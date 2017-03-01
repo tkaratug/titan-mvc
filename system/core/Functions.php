@@ -125,7 +125,7 @@ if ( ! function_exists('lang') ) {
  * @return void
  */
 if( ! function_exists('view') ) {
-    function view($file, $vars, $cache = false)
+    function view($file, $vars = [], $cache = false)
     {
         $titan = Loader::getInstance();
         $titan->plugin('template');

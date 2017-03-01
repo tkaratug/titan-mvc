@@ -12,27 +12,45 @@ require_once 'Smtp.php';
 
 class Mail extends PHPMailer
 {
-	// Mail Settings
-	public $config = [];
+	// Titan Instance
+	private $titan;
+
+	// Mail Config
+	private $config;
 
 	function __construct()
 	{
 		parent::__construct();
 
+		// Getting Loader Instance
+		$this->titan 	= Loader::getInstance();
+
+		// E-Mail Config
+		$this->config 	= $this->titan->config('email');
+
 		// Setting SMTP Protocol
 		$this->isSMTP();
-
-		// Setting Default Port
-		$this->Port 	= 587;
-
-		// Default Charset
-		$this->CharSet 	= 'UTF-8';
 
 		// Default SMTP Auth
 		$this->SMTPAuth	= true;
 
 		// Default HTML Format
 		$this->isHTML(true);
+
+		// SMTP Server
+		$this->Host 	= $this->config['server'];
+
+		// Username
+		$this->Username = $this->config['username'];
+
+		// User Password
+		$this->Password = $this->config['password'];
+
+		// Default Port
+		$this->Port 	= $this->config['port'];
+
+		// Default Charset
+		$this->CharSet 	= $this->config['charset'];
 	}
 
 	/**

@@ -1,3 +1,13 @@
+v1.1.4
+    [Düzeltme]: Database pluginindeki update() ve delete() methodları uygulandıktan sonra sorgu cümlesi resetlendi.
+    [Düzeltme]: Url helperda bulunan redirect() fonksiyonundaki, belirtilen süre içerisinde yönlendirme yapmama hatası giderildi.
+    [Düzeltme]: Edge şablon motoru ile çalışan view() fonksiyonundaki parametre hatası giderildi.
+    [Yeni]: Database pluginine, PDO nesnesinin methodlarına erişim sağlayan pdo() methodu eklendi.
+    [Yeni]: Validation pluginine, iki form elemanına girilen verileri karşılaştıran matches() methodu eklendi.
+    [Yeni]: Mail plugini için "/app/config" içerisine ayar dosyası eklendi ve default ayarlar buradan okunacak şekilde düzeltildi.
+    [Yeni]: File Upload plugini eklendi.
+    [Yeni]: Curl plugini eklendi.
+
 v1.1.3
     [Düzeltme]: Mevcut 'Template' plugininin ismi 'Asset' olarak değiştirildi.
     [Yeni]: CSS, JS ve imaj dosyalarının yer aldığı '/public' dizinine erişmek için 'PUBLIC_DIR' sabiti tanımlandı.

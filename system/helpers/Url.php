@@ -177,10 +177,10 @@ if ( ! function_exists('get_js') ) {
  * @return 	void
  */
 if ( ! function_exists('redirect')) {
-	function redirect($link, $method = 'location')
+	function redirect($link, $delay = 0)
 	{
-		if($method == 'refresh')
-			header("Refresh:0;url=" . $link);
+		if($delay > 0)
+			header("Refresh:" . $delay . ";url=" . $link);
 		else
 			header("Location:" . $link);
 	}

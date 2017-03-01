@@ -1,6 +1,6 @@
 <?php defined('DIRECT') OR exit('No direct script access allowed');
 /**
- * Database config file (Production)
+ * Database config file (Development)
  * 
  * Turan Karatuğ - <tkaratug@hotmail.com.tr>
  */

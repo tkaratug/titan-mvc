@@ -26,3 +26,4 @@ $lang['validation']['valid_cc_error']       = '%s field must be valid credit car
 $lang['validation']['contains_error']       = '%s field must contain "%t"';
 $lang['validation']['min_numeric_error']    = '%s field must be minimum "%t"';
 $lang['validation']['max_numeric_error']    = '%s field must be maximum "%t"';
+$lang['validation']['matches_error']		= '%s field doesn\'t match with %t field';

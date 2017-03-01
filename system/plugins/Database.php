@@ -108,6 +108,16 @@ class Database
 	}
 
 	/**
+	 * Instance of DB Connection
+	 * @return object
+	 */
+	public function pdo() {
+       	if ($this->pdo instanceof \PDO) {
+       		return $this->pdo;
+       	}
+ 	}
+
+	/**
 	 * Defines columns to select
 	 * @param 	$select
 	 * @return 	$this
@@ -633,6 +643,10 @@ class Database
 		{
 			$query 		= $this->pdo->prepare($this->sql);
 			$update 	= $query->execute($val);
+
+			// Reset
+			$this->reset();
+
 			return $update;
 		}
 		catch(\PDOException $e)
@@ -672,6 +686,10 @@ class Database
 		{
 			$query 	= $this->pdo->prepare($this->sql);
 			$delete = $query->execute($val);
+
+			// Reset
+			$this->reset();
+			
 			return $delete;
 		}
 		catch(\PDOException $e)
