@@ -13,12 +13,16 @@ class Template
 {
 	public function render($file, $vars, $cache = false)
 	{
-		$paths = array(APP_DIR . '/views');
-
+		$paths  = array(APP_DIR . '/views');
+        
+        // .blade.php extension support
+        $loader = new EdgeFileLoader($paths);
+		$loader->addFileExtension('.blade.php');
+        
 		if($cache === false)
-			$this->edge = new Edge(new EdgeFileLoader($paths));
+			$this->edge = new Edge($loader);
 		else
-			$this->edge = new Edge(new EdgeFileLoader($paths), null, new EdgeFileCache(APP_DIR . '/cache'));
+			$this->edge = new Edge($loader, null, new EdgeFileCache(APP_DIR . '/cache'));
 
 		return $this->edge->render($file, $vars);
 	}
