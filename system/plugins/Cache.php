@@ -48,10 +48,11 @@ class Cache
 	 * Get cache directory
 	 * @return 	string|bool
 	 */
-	private function get_cache_dir()
+	private function get_cache_dir($filename = null)
 	{
 		if($this->check_cache_dir() === true) {
-			$filename = preg_replace('/[^0-9a-z\.\_\-]/i', '', strtolower($this->get_cache()));
+			if(is_null($filename))
+				$filename = preg_replace('/[^0-9a-z\.\_\-]/i', '', strtolower($this->get_cache()));
 			return $this->get_path() . '/' . $this->hash_file($filename) . $this->get_extension();
 		} else {
 			return false;
@@ -62,15 +63,15 @@ class Cache
 	 * Load cached file content
 	 * @return 	string|bool
 	 */
-	private function load_cache()
+	private function load_cache($filename = null)
 	{
 		if($this->get_cache_dir() !== false) {
-			if(file_exists($this->get_cache_dir())) {
-				$file = file_get_contents($this->get_cache_dir());
+			if(file_exists($this->get_cache_dir($filename))) {
+				$file = file_get_contents($this->get_cache_dir($filename));
 				return json_decode($file, true);
 			} else {
 				return false;
-			}			
+			}
 		} else {
 			return false;
 		}
@@ -111,9 +112,9 @@ class Cache
 	 * @param 	string 	$key
 	 * @return 	string
 	 */
-	public function read($key)
+	public function read($key, $filename = null)
 	{
-		$cache_content = $this->load_cache();
+		$cache_content = $this->load_cache($filename);
 		if(!isset($cache_content[$key]['data']))
 			return null;
 		else
@@ -193,7 +194,7 @@ class Cache
 			$file = fopen($this->get_cache_dir(), 'w');
 			fclose($file);
 		}
-	}	
+	}
 
 	/**
 	 * Check cached datas with $key if exists
